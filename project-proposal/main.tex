@@ -38,107 +38,111 @@
 
 % -----------------------------------------------------
 
-\title{Grievance-Resolution System for a Tier-2/3 City}
+\title{ChargEV: Find. Charge. Go Green.}
 
-\BvrSetLabInstructor{Dr. Raghav B. Venkataramaiyer}
+\BvrSetLabInstructor{Nisha Thakur}
 
 \BvrSubtitle{%
+  The Smart EV Charging Station Platform \\
   Project Proposal for UCS503P  \\
   Submitted to: \BvrLabInstructorValue \\ \bfseries
   Thapar Institute of Engineering and Technology% 
 }
 
 \author{
-  Vidya Vaidyanathan, CSED%
-  \thanks{Roll No: \texttt{1024030xxx}, %
-    Email: \texttt{vvaidhanathan\_be24\@thapar.edu}}
+  Pehal, CSED%
+  \thanks{Roll No: \texttt{1024170103}, %
+    Email: \texttt{ppehal\_be24\@thapar.edu}}
   \and 
-  Bhanurekha Ganesan, CSED%
-  \thanks{Roll No: \texttt{1024030xxx}, %
-    Email: \texttt{bganesan\_be24\@thapar.edu}}
+  Briti Arora, CSED%
+  \thanks{Roll No: \texttt{1024170431}, %
+    Email: \texttt{barora2\_be24\@thapar.edu}}
 }
 
-\date{\today}
+\date{15 August 2026}
 
 \begin{document}
 \maketitle
 
 \section{Higher-order goal%
   \BvrHint{\ldots secondary framing}}
-This project aims to improve sustainable urban
-governance by reducing the time and effort required to
-resolve citizen issues. While the topic is broader than
-any single municipality, the immediate engineering
-objective is to translate \emph{efficient public
-  service delivery} into a measurable, deployable
-software solution.
+This project aims to accelerate the adoption of electric
+vehicles (EVs) by removing a major piece of charging
+infrastructure friction: the uncertainty around where to
+charge, whether a station is available, and whether a slot
+can be guaranteed. While the broader goal is a smarter,
+greener transportation ecosystem, the immediate engineering
+objective is to translate \emph{predictable, low-anxiety EV
+charging} into a measurable, deployable software solution.
 
 \section{Time-to-value %
 \BvrHint{\ldots primary heuristic}}
 \begin{itemize}[leftmargin=0.7cm]
-    \item We will deliver meaningful increments quickly by prototyping the core user workflow and validating it with users within a short iteration window.
+    \item We will deliver meaningful increments quickly by prototyping the core discover-book-charge workflow and validating it with users within a short iteration window.
     \item We will prioritize fast feedback over perfection by using weekly iterations (and targeting CI-backed automation early) to reduce release friction.
-    \item Success is defined by what can be delivered and measured in the first iteration, then improved based on user feedback.
+    \item Success is defined by what can be delivered and measured in the first iteration -- a working station locator and booking flow -- then improved based on user feedback.
 \end{itemize}
 
 \section{Problem Statement}
-Citizens in a tier-2/3 Indian city face delays and uncertainty when reporting local issues (e.g., streetlight outages, water leakage, garbage accumulation, road potholes). Common pain points include:
+EV drivers routinely face friction that turns charging into
+a source of anxiety rather than a routine task. Common pain
+points include:
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Fragmentation:} complaints are often made via multiple channels (calls, social media, paper forms), causing lost context.
-    \item \textbf{Low transparency:} citizens cannot easily see the status of their complaint (e.g., ``received'', ``assigned'', ``in progress'', ``resolved'').
-    \item \textbf{Slow coordination:} departments/field teams lack a unified, trackable workflow with clear ownership.
-    \item \textbf{Poor data quality:} duplicate or incomplete reports force rework and extend resolution time.
+    \item \textbf{Discovery gap:} it is hard to find nearby charging stations from a single, reliable source.
+    \item \textbf{Unclear availability:} station status (free, occupied, out of service) is rarely known before arriving.
+    \item \textbf{Wasted time:} drivers wait at busy stations with no way to reserve a slot in advance.
+    \item \textbf{Generic search results:} existing tools do not filter by connector type, distance, availability, or price together.
+    \item \textbf{Difficult trip planning:} long-distance EV travel requires manually chaining together charging stops.
+    \item \textbf{Low engagement:} there is little incentive for drivers to keep returning to a single platform.
 \end{itemize}
 
-\textbf{Why this matters now (contextual relevance):} In an urban setting with limited staff bandwidth, even small process improvements can noticeably reduce resolution delays and repeated submissions.
+\textbf{Why this matters now (contextual relevance):} as EV
+ownership grows, even small improvements in charging
+predictability translate into measurable reductions in
+range anxiety and wasted driver time.
 
 \section{Proposed Solution %
 \BvrHint{\ldots Software Proposition}}
 \subsection{Overview}
-Build a \textbf{web-based} ``Grievance-to-Resolution'' system with the following components:
+Build a \textbf{web-based} EV charging platform,
+\emph{ChargEV}, with the following components:
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Citizen submission portal:} users submit an issue with photo (optional), category, and locality/ward.
-    \item \textbf{Automated triage:} basic duplicate detection and completeness checks.
-    \item \textbf{Department workflow:} assign issues to relevant department/team and update statuses.
-    \item \textbf{Status transparency:} citizens track status and receive notifications when resolved.
-    \item \textbf{Admin/ops dashboard:} performance summaries (resolution time, backlog).
+    \item \textbf{Centralized station locator:} a single source of truth for nearby EV charging stations.
+    \item \textbf{Real-time availability dashboard:} live status per station/connector.
+    \item \textbf{Online slot booking \& reservation system:} drivers reserve a charging slot in advance.
+    \item \textbf{Smart search \& filters:} filter by connector type, distance, availability, and price.
+    \item \textbf{Trip planning with charging stops:} route-aware suggestions for long-distance travel.
+    \item \textbf{Rewards, badges \& eco-impact tracking:} gamified engagement layer (``EcoCoins'').
 \end{itemize}
 
 \subsection{Core workflow}
+The user journey is organized into three phases:
 \begin{enumerate}[leftmargin=0.7cm]
-    \item Citizen creates a complaint and receives a complaint ID immediately.
-    \item System validates completeness and suggests possible duplicates (lightweight similarity on text/category and approximate location).
-    \item Department staff update status (Received $\rightarrow$ Assigned $\rightarrow$ In Progress $\rightarrow$ Resolved).
-    \item Citizen views status updates and resolution notes.
+    \item \textbf{Discover:} access the cross-device web platform, search/filter nearby stations, and evaluate details such as live availability, pricing, connector compatibility, and reviews.
+    \item \textbf{Act:} book a time slot and confirm instantly, then get seamless routing/navigation to the station for a guaranteed charge.
+    \item \textbf{Engage:} accumulate EcoCoins and track personal savings and eco-impact, incentivizing return usage.
 \end{enumerate}
 
-\subsection{Operational constraints for an educational, tier-2/3 setting}
+\subsection{Operational constraints for an educational setting}
 \begin{itemize}[leftmargin=0.7cm]
     \item Keep the solution usable on low-to-mid range devices via responsive web design.
-    \item Avoid dependence on advanced research algorithms; focus on workflow, automation, and system correctness.
-    \item Design for deployability using common web hosting and managed databases.
+    \item Avoid dependence on advanced research algorithms; focus on workflow, real-time data, and system correctness.
+    \item Design for deployability using common web hosting, managed databases, and existing location-intelligence APIs.
 \end{itemize}
 
 \section{Solution Approach %
 \BvrHint{\ldots Engineering focus}}
-This is an engineering course project, so we focus on scalable administrative and workflow aspects rather than novel algorithm research.
+This is an engineering course project, so we focus on a
+practical, scalable web architecture rather than novel
+algorithm research.
 
-\subsection{Duplicate/quality assistance %
-\BvrHint{\ldots non-research}}
-Duplicate detection will be heuristic-based:
-\begin{itemize}[leftmargin=0.7cm]
-    \item Normalize text (category + short description keywords).
-    \item Use a simple similarity measure (e.g., token overlap / TF-IDF cosine with threshold) without claiming state-of-the-art.
-    \item Show top candidate duplicates to staff for decision; never fully auto-delete or auto-reject.
-\end{itemize}
-
-\subsection{Web architecture %
+\subsection{System architecture %
 \BvrHint{\ldots web-based solution}}
 A typical 3-tier web architecture:
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Frontend:} responsive UI for citizens and staff (status pages, submission form, dashboard).
-    \item \textbf{Backend API:} authentication, complaint submission, status transitions, assignment logic.
-    \item \textbf{Database:} store users, complaints, status history, attachments metadata.
+    \item \textbf{Frontend (the interface):} built for speed and cross-device responsiveness using HTML5, CSS3, Bootstrap~5, and JavaScript.
+    \item \textbf{Backend (the engine):} high-performance, event-driven request routing using Node.js and Express.js.
+    \item \textbf{Data \& logistics (the brains):} cloud-native storage via MongoDB Atlas, combined with location-intelligence APIs -- Google Maps API, Google Places API, and Google Directions API -- for search, routing, and trip planning.
 \end{itemize}
 
 \subsection{CI/CD and fast delivery enabler}
@@ -146,97 +150,115 @@ CI/CD will be used to:
 \begin{itemize}[leftmargin=0.7cm]
     \item Automatically build and run tests on every change.
     \item Produce repeatable deployment artifacts to staging.
-    \item Enable safe and frequent releases of incremental features.
+    \item Enable safe and frequent releases of incremental features (e.g., filters, then trip planning, then rewards).
 \end{itemize}
 
 \section{Evaluation Criterion %
 \BvrHint{\ldots measurable and attributable}}
-We define success using measurable metrics tied to the core workflow.
+We define success using measurable metrics tied to the core
+discover-book-charge workflow.
 
 \subsection{Primary evaluation metric}
-\textbf{Time-to-acknowledgement (TTA):} time between complaint submission and ``Received/Assigned'' status creation in the system.
+\textbf{Time-to-charge (TTC):} time between a user opening
+the app to find a station and successfully starting a
+charge at a booked slot.
 \begin{itemize}[leftmargin=0.7cm]
-    \item Target: median TTA $\le$ 2 hours during pilot window.
-    \item Attribution: measured from database timestamps (submission vs. first status update by staff).
+    \item Target: median TTC reduced compared to a no-booking baseline (walk-in search).
+    \item Attribution: measured from application timestamps (search start vs. booking confirmation vs. charge start).
 \end{itemize}
 
 \subsection{Secondary evaluation metrics}
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Resolution time reduction:} reduce time-to-resolved compared to baseline process (even if baseline is collected via survey).
-    \item \textbf{Duplicate rate:} percentage of complaints flagged as duplicates and resolved without rework.
-    \item \textbf{User clarity:} citizen-reported clarity of status using a simple 1--5 feedback question.
-    \item \textbf{Reliability:} availability of staging/production for login and submission during business hours (e.g., $\ge$ 99\% uptime in pilot).
+    \item \textbf{Booking conversion rate:} percentage of searches that convert into a confirmed slot booking.
+    \item \textbf{Availability data accuracy:} agreement between displayed status and actual station status at arrival.
+    \item \textbf{Station utilization:} change in booked-slot usage for participating stations.
+    \item \textbf{User engagement:} repeat-usage rate and EcoCoins accumulation per active user.
 \end{itemize}
 
 \subsection{Pilot validation plan %
 \BvrHint{\ldots high-level}}
 \begin{itemize}[leftmargin=0.7cm]
-    \item Recruit 10--20 pilot users (citizens) and 3--5 staff roles (department simulation if real staff unavailable).
-    \item Compare metrics before/after within the iteration window by logging baseline estimates via short interviews or existing process observations.
+    \item Recruit 10--20 pilot EV users and coordinate with 2--3 charging station operators (simulated if real operators are unavailable).
+    \item Compare metrics before/after within the iteration window by logging baseline estimates via short interviews or existing walk-in behaviour.
 \end{itemize}
 
 \section{Scalability %
 \BvrHint{\ldots with foresight}}
-The proposition should scale in both theoretical and practical senses.
+The proposition should scale in both theoretical and
+practical senses.
 
 \begin{enumerate}[leftmargin=0.7cm]
-    \item \textbf{Scalable (theoretically):} The system should support growth in number of complaints and concurrent dashboard usage by:
+    \item \textbf{Scalable (theoretically):} the system should support growth in the number of stations, bookings, and concurrent users by:
     \begin{itemize}[leftmargin=0.7cm]
         \item decoupling components (frontend/backend),
-        \item enabling pagination and indexing for common queries,
-        \item using stateless API design.
+        \item enabling pagination and indexing for common location queries,
+        \item using a stateless, event-driven API design.
     \end{itemize}
     
-    \item \textbf{Operationally deployable (practically):} The system should run on common web hosting:
+    \item \textbf{Operationally deployable (practically):} the system should run on common web hosting:
     \begin{itemize}[leftmargin=0.7cm]
-        \item managed database,
+        \item cloud-native database (MongoDB Atlas),
         \item containerized or platform-hosted deployment,
         \item CI/CD pipeline for staging/production.
     \end{itemize}
 \end{enumerate}
 
 \section{Engine availability heuristic}
-A mature set of ``engines'' (tooling/services) is available to implement this as a web-based project:
+A mature set of ``engines'' (tooling/services) is available
+to implement this as a web-based project:
 \begin{itemize}[leftmargin=0.7cm]
-    \item Web framework for REST APIs and templated/reactive pages.
-    \item Managed relational or document database.
+    \item Web framework for REST APIs (Node.js, Express.js).
+    \item Managed cloud document database (MongoDB Atlas).
+    \item Location-intelligence APIs (Google Maps, Places, Directions) for search, geocoding, and routing.
     \item Authentication approach (token-based or session-based).
-    \item Object storage for optional attachments (or local storage for pilot).
     \item Test framework for unit/integration tests.
     \item CI runner and staging deployment target.
 \end{itemize}
-We will use these mature components to focus on workflow design, correctness, and measurement rather than inventing new infrastructure.
+We will use these mature components to focus on workflow
+design, real-time correctness, and measurement rather than
+inventing new infrastructure.
 
 \section{Project scope and deliverables %
 \BvrHint{\ldots iteration-friendly}}
 \subsection{Initial deliverable %
 \BvrHint{\ldots first iteration}}
 \begin{itemize}[leftmargin=0.7cm]
-    \item Citizen submission form + complaint ID generation
-    \item Staff workflow: update status and assignment
-    \item Citizen status page: view timeline/history
-    \item Basic logging and timestamps for TTA measurement
+    \item Centralized EV charging station locator (search + map view)
+    \item Real-time availability and status dashboard
+    \item Online slot booking \& reservation flow
+    \item Smart search \& filters (connector type, distance, availability, price)
     \item CI: build + backend unit tests + linting
     \item CD to staging with a single command or pipeline job
 \end{itemize}
 
 \subsection{Subsequent deliverables}
 \begin{itemize}[leftmargin=0.7cm]
-    \item Lightweight duplicate suggestions with staff review
-    \item Notification layer (email/SMS optional in later iteration; can start with in-app notifications)
-    \item Admin dashboard for metrics and backlog
+    \item Trip planning with charging stops for long-distance routes
+    \item Rewards, badges \& eco-friendly impact tracking (EcoCoins)
+    \item Admin dashboard for station operators (utilization, schedules)
     \item Improved search/filtering and indexed queries for scale readiness
 \end{itemize}
 
 \section{Risks and mitigations}
 \begin{itemize}[leftmargin=0.7cm]
-    \item \textbf{Data privacy / consent:} minimize collected data; keep attachments optional; store only what is needed.
-    \item \textbf{Staff adoption:} provide an easy UI for status updates; keep workflow steps minimal; include shortcuts.
-    \item \textbf{Evaluation measurement ambiguity:} instrument timestamps and define clear status transitions before development begins.
-    \item \textbf{Operational issues in pilot:} use staging early; ensure CI/CD produces repeatable deployments.
+    \item \textbf{Stale or incorrect availability data:} rely on periodic sync with station status and clearly timestamp last-updated status; flag stale data in the UI.
+    \item \textbf{Third-party API costs/limits:} cache Google Maps/Places/Directions responses where possible and monitor quota usage.
+    \item \textbf{Low initial station coverage:} start with a curated set of stations/operators for the pilot and expand incrementally.
+    \item \textbf{User adoption:} keep the booking flow to a minimal number of steps and use the EcoCoins/rewards loop to encourage repeat use.
+    \item \textbf{Location data privacy:} minimize stored location data; only persist what is needed for search and trip planning.
 \end{itemize}
 
 \section{Summary}
-This project proposes a deployable web platform to reduce grievance handling delays in a tier-2/3 city context. It meets the course criteria by emphasizing time-to-value through rapid iterations, implementing CI/CD to support frequent safe releases, and using measurable evaluation criteria (especially time-to-acknowledgement). It remains focused on engineering workflow and scalability readiness rather than research-driven novelty.
+This project proposes ChargEV, a deployable web platform
+that eliminates range anxiety by making EV charging
+simple, convenient, and predictable through a centralized
+locator, real-time availability, and smart online booking.
+It meets the course criteria by emphasizing time-to-value
+through rapid iterations, implementing CI/CD to support
+frequent safe releases, and using measurable evaluation
+criteria (especially time-to-charge and booking conversion).
+It remains focused on engineering workflow, real-time data
+integration, and scalability readiness rather than
+research-driven novelty.
 
 \end{document}
