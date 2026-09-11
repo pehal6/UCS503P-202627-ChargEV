@@ -1,0 +1,214 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ChargEV Activity Diagram (Swimlanes)" id="chargev-activity-swim-1">
+    <mxGraphModel dx="2575" dy="1335" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" value="&lt;b style=&#39;font-size:15px;color:#1a1a2e&#39;&gt;ChargEV: Complete Search-Book-Charge Flow&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="1000" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_driver" parent="1" style="swimlane;html=1;whiteSpace=wrap;horizontal=1;startSize=26;fillColor=#F8FAFC;strokeColor=#94A3B8;fontStyle=1;fontSize=10.5;fontColor=#334155;" value="EV Driver / Frontend" vertex="1">
+          <mxGeometry height="1560" width="220" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_backend" parent="1" style="swimlane;html=1;whiteSpace=wrap;horizontal=1;startSize=26;fillColor=#EFF6FF;strokeColor=#94A3B8;fontStyle=1;fontSize=10.5;fontColor=#334155;" value="Backend API (Node.js/Express)" vertex="1">
+          <mxGeometry height="1560" width="260" x="220" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_locapi" parent="1" style="swimlane;html=1;whiteSpace=wrap;horizontal=1;startSize=26;fillColor=#F0FDFA;strokeColor=#94A3B8;fontStyle=1;fontSize=10.5;fontColor=#334155;" value="Location Services (Maps/Places/Directions)" vertex="1">
+          <mxGeometry height="1560" width="240" x="480" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_db" parent="1" style="swimlane;html=1;whiteSpace=wrap;horizontal=1;startSize=26;fillColor=#FEF2F2;strokeColor=#94A3B8;fontStyle=1;fontSize=10.5;fontColor=#334155;" value="MongoDB Atlas" vertex="1">
+          <mxGeometry height="1560" width="220" x="720" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="start1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="18" width="18" x="101" y="101" as="geometry" />
+        </mxCell>
+        <mxCell id="v2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Open ChargEV App" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="start1" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Enter Location, Filters &amp;amp; Select Action" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="184" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="v2" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#E0E7FF;strokeColor=#4338CA;fontSize=9.5;" value="Receive &amp;amp; Parse Request" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="219" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="v4" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v8" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#7C3AED;fontSize=9;fontColor=#4C1D95;" value="Valid Request?" vertex="1">
+          <mxGeometry height="54" width="120" x="290" y="272" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="v6" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=9.5;" value="Return HTTP 400" vertex="1">
+          <mxGeometry height="32" width="140" x="490" y="283" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="v8" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v10" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="552" y="346" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="v10" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="end12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bar14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="8" width="170" x="265" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="v8" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="bar14" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#CCFBF1;strokeColor=#0D9488;fontSize=9.5;" value="Geocode Location &amp;amp; Fetch Places Data" vertex="1">
+          <mxGeometry height="40" width="190" x="505" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="bar14" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#0D9488;" target="v16" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=9.5;" value="Fetch Station Availability Records" vertex="1">
+          <mxGeometry height="40" width="190" x="735" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="bar14" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="v18" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bar20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="8" width="170" x="265" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="v16" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#0D9488;" target="bar20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="v18" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="bar20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Rank Results &amp;amp; Apply Smart Filters" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="499" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="bar20" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v23" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Display Results &amp;amp; Map" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="564" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="v23" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v25" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Select Station, Slot &amp;amp; Confirm Booking" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="624" as="geometry" />
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="v25" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#E0E7FF;strokeColor=#4338CA;fontSize=9.5;" value="Check Real-Time Availability" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="664" as="geometry" />
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="v27" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v29" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=9.5;" value="Query Station Slot Status" vertex="1">
+          <mxGeometry height="40" width="160" x="750" y="664" as="geometry" />
+        </mxCell>
+        <mxCell id="e32" edge="1" parent="1" source="v29" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="v31" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v33" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#7C3AED;fontSize=9;fontColor=#4C1D95;" value="Slot Free?" vertex="1">
+          <mxGeometry height="54" width="120" x="290" y="717" as="geometry" />
+        </mxCell>
+        <mxCell id="e34" edge="1" parent="1" source="v31" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="v33" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=9.5;" value="Show Alternative Slots to Driver" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="854" as="geometry" />
+        </mxCell>
+        <mxCell id="e36" edge="1" parent="1" source="v33" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#D97706;" target="v35" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e37" edge="1" parent="1" source="v35" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#D97706;" target="v27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v38" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Reserve Slot" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="784" as="geometry" />
+        </mxCell>
+        <mxCell id="e39" edge="1" parent="1" source="v33" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v38" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=9.5;" value="Write Booking Record" vertex="1">
+          <mxGeometry height="40" width="160" x="750" y="784" as="geometry" />
+        </mxCell>
+        <mxCell id="e41" edge="1" parent="1" source="v38" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="v40" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#CCFBF1;strokeColor=#0D9488;fontSize=9.5;" value="Compute Route (Directions API)" vertex="1">
+          <mxGeometry height="40" width="190" x="505" y="844" as="geometry" />
+        </mxCell>
+        <mxCell id="e43" edge="1" parent="1" source="v40" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#0D9488;" target="v42" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Return Confirmation &amp;amp; Route" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="904" as="geometry" />
+        </mxCell>
+        <mxCell id="e45" edge="1" parent="1" source="v42" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#0D9488;" target="v44" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Display Confirmation &amp;amp; Start Navigation" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="964" as="geometry" />
+        </mxCell>
+        <mxCell id="e47" edge="1" parent="1" source="v44" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v46" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Arrive &amp;amp; Start Charging Session" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="1024" as="geometry" />
+        </mxCell>
+        <mxCell id="e49" edge="1" parent="1" source="v46" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="v48" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v50" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Update Station Status = In Use" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="1084" as="geometry" />
+        </mxCell>
+        <mxCell id="e51" edge="1" parent="1" source="v48" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v50" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v52" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=9.5;" value="Persist Status Update" vertex="1">
+          <mxGeometry height="40" width="160" x="750" y="1084" as="geometry" />
+        </mxCell>
+        <mxCell id="e53" edge="1" parent="1" source="v50" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="v52" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v54" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Charging Complete" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="1144" as="geometry" />
+        </mxCell>
+        <mxCell id="e55" edge="1" parent="1" source="v50" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v54" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v56" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Compute Session Cost &amp;amp; Award EcoCoins" vertex="1">
+          <mxGeometry height="40" width="190" x="255" y="1204" as="geometry" />
+        </mxCell>
+        <mxCell id="e57" edge="1" parent="1" source="v54" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v56" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v58" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=9.5;" value="Save Session, Cost &amp;amp; Rewards" vertex="1">
+          <mxGeometry height="40" width="170" x="745" y="1204" as="geometry" />
+        </mxCell>
+        <mxCell id="e59" edge="1" parent="1" source="v56" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#DC2626;" target="v58" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=9.5;" value="Display Receipt &amp;amp; Eco-Impact Summary" vertex="1">
+          <mxGeometry height="40" width="190" x="15" y="1264" as="geometry" />
+        </mxCell>
+        <mxCell id="e61" edge="1" parent="1" source="v58" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#2563EB;" target="v60" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end62" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="102" y="1326" as="geometry" />
+        </mxCell>
+        <mxCell id="e63" edge="1" parent="1" source="v60" style="endArrow=block;html=1;fontSize=9;fontColor=#B91C1C;strokeColor=#444;" target="end62" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

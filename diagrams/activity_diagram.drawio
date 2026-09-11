@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ChargEV Activity Diagram (Search)" id="chargev-activity-1">
+    <mxGraphModel dx="609" dy="485" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;labelBackgroundColor=none;" value="&lt;b style=&#39;font-size:15px;color:#1a1a2e&#39;&gt;ChargEV – Activity Diagram (Station Search)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="500" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="start1" parent="1" style="ellipse;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="18" width="18" x="241" y="51" as="geometry" />
+        </mxCell>
+        <mxCell id="v2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Enter search location and filters" vertex="1">
+          <mxGeometry height="40" width="220" x="140" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="start1" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Submit search request" vertex="1">
+          <mxGeometry height="40" width="220" x="140" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="v2" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Backend gets the request" vertex="1">
+          <mxGeometry height="40" width="220" x="140" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="v4" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v8" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontSize=9.5;labelBackgroundColor=none;" value="Valid request?" vertex="1">
+          <mxGeometry height="60" width="130" x="185" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="v6" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Reject the request" vertex="1">
+          <mxGeometry height="36" width="90" x="400" y="282" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="v8" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;spacingTop=-15;" target="v10" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end12" parent="1" style="ellipse;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="437" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="end12o" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=1.5;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="433" y="348" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="v10" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="end12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;spacingTop=0;" value="Location (Maps API)" vertex="1">
+          <mxGeometry height="40" width="220" x="140" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="v8" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;entryX=0.5;entryY=0;entryDx=0;entryDy=0;spacingTop=-20;spacingLeft=-27;" target="v14" value="Yes">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="250" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Fetch nearby stations (Places API)" vertex="1">
+          <mxGeometry height="40" width="210" x="140" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="v14" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v16" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Get slot status from database" vertex="1">
+          <mxGeometry height="40" width="230" x="140" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="v16" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v18" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Apply smart filters (distance/price)" vertex="1">
+          <mxGeometry height="40" width="220" x="140" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="v18" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Sort stations" vertex="1">
+          <mxGeometry height="40" width="210" x="140" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="v20" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v22" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fontSize=10.5;labelBackgroundColor=none;" value="Display results and map" vertex="1">
+          <mxGeometry height="40" width="220" x="135" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="v22" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="v24" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="end26" parent="1" style="ellipse;whiteSpace=wrap;html=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="242" y="712" as="geometry" />
+        </mxCell>
+        <mxCell id="end26o" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=1.5;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="238" y="708" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="v24" style="endArrow=block;html=1;fontSize=9;fontColor=default;labelBackgroundColor=none;" target="end26" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
