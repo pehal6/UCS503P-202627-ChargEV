@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | chargEV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Charg<span>ENG</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="station.html">Stations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mybooking.html">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-login me-2" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-register" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-5 mb-5">
+        <div class="text-center my-4">
+            <span class="section-badge">GET IN TOUCH</span>
+            <h2 class="fw-bold">Contact Support</h2>
+            <p class="section-subtitle">Have questions or need assistance with charging? We're here to help.</p>
+        </div>
+
+        <div class="row g-4 my-3">
+            <!-- Contact Info Cards -->
+            <div class="col-lg-4">
+                <div class="contact-box mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-geo-alt-fill text-success fs-2"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Headquarters</h6>
+                            <p class="text-muted mb-0 small">123 Green Mobility Way, Tech Park</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-box mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-envelope-fill text-success fs-2"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email Us</h6>
+                            <p class="text-muted mb-0 small">support@chargEV.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-box">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-telephone-fill text-success fs-2"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Call Support</h6>
+                            <p class="text-muted mb-0 small">+1 (800) 555-EVCHARGE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="contact-box">
+                    <h4 class="fw-bold mb-4">Send Us a Message</h4>
+                    <form id="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Your Email</label>
+                                <input type="email" class="form-control" placeholder="name@example.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-control" placeholder="Inquiry about..." required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" rows="4" style="height: auto;" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-green w-100 py-3 fw-bold">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 chargEV. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

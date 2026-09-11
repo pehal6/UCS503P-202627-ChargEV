@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | chargEV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Charg<span>ENG</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="station.html">Stations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mybooking.html">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-login me-2" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-register" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-5 mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-6">
+                <div class="contact-box text-start">
+                    <div class="text-center mb-4">
+                        <span class="section-badge">CHECKOUT</span>
+                        <h3 class="fw-bold">Payment Summary</h3>
+                    </div>
+
+                    <!-- Order Summary Card -->
+                    <div class="p-3 bg-light rounded-3 mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Station</span>
+                            <strong id="summary-station">Tata Power Supercharge</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Date & Time</span>
+                            <span id="summary-datetime">Aug 30, 2026 (04:00 PM)</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Charging Fee (1 Hr)</span>
+                            <span>₹300.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Service Tax (18%)</span>
+                            <span>₹54.00</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold fs-5">Total Amount</span>
+                            <strong class="text-success fs-4">₹354.00</strong>
+                        </div>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <form id="payment-form">
+                        <label class="form-label fw-bold mb-3">Select Payment Method</label>
+                        <div class="d-flex flex-column gap-2 mb-4">
+                            <div class="form-check p-3 border rounded-3">
+                                <input class="form-check-input ms-1" type="radio" name="paymentMethod" id="upi" checked>
+                                <label class="form-check-label ms-2 fw-bold" for="upi">
+                                    <i class="bi bi-qr-code-scan text-success me-2"></i>UPI / QR Code
+                                </label>
+                            </div>
+                            <div class="form-check p-3 border rounded-3">
+                                <input class="form-check-input ms-1" type="radio" name="paymentMethod" id="card">
+                                <label class="form-check-label ms-2 fw-bold" for="card">
+                                    <i class="bi bi-credit-card-fill text-success me-2"></i>Credit / Debit Card
+                                </label>
+                            </div>
+                            <div class="form-check p-3 border rounded-3">
+                                <input class="form-check-input ms-1" type="radio" name="paymentMethod" id="wallet">
+                                <label class="form-check-label ms-2 fw-bold" for="wallet">
+                                    <i class="bi bi-wallet2 text-success me-2"></i>chargEV Wallet
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-green w-100 py-3 fw-bold">Pay ₹354.00 & Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 chargEV. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

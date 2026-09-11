@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | chargEV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Charg<span>ENG</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="station.html">Stations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mybooking.html">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-outline-light btn-sm" href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <div>
+                <h2 class="fw-bold mb-1">Welcome back, <span class="text-success">Driver</span>!</h2>
+                <p class="text-muted mb-0">Overview of your EV charging stats and recent activities.</p>
+            </div>
+            <a href="station.html" class="btn btn-green fw-bold"><i class="bi bi-plus-circle me-1"></i> Book New Slot</a>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="dashboard-card p-4 text-start">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="text-muted small fw-bold">TOTAL CHARGING</span>
+                        <i class="bi bi-lightning-charge text-success fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0">128.5 <small class="fs-6 text-muted">kWh</small></h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card p-4 text-start">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="text-muted small fw-bold">ACTIVE BOOKINGS</span>
+                        <i class="bi bi-calendar-check text-success fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0">1 Slot</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card p-4 text-start">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="text-muted small fw-bold">WALLET BALANCE</span>
+                        <i class="bi bi-wallet2 text-success fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0">₹1,450.00</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Reservation Overview -->
+        <div class="dashboard-card text-start mb-4 p-4">
+            <h5 class="fw-bold mb-3"><i class="bi bi-clock-history me-2 text-success"></i>Upcoming Charging Session</h5>
+            <div class="row align-items-center bg-light p-3 rounded-3 g-3">
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-1">Tata Power Supercharge</h6>
+                    <p class="text-muted mb-0 small"><i class="bi bi-geo-alt"></i> Model Town, Jalandhar</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="text-muted small">Date & Time:</span>
+                    <p class="fw-bold mb-0">Today, 04:00 PM - 05:00 PM</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="mybooking.html" class="btn btn-outline-success btn-sm fw-bold me-2">View Details</a>
+                    <button class="btn btn-danger btn-sm">Cancel Slot</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 chargEV. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
