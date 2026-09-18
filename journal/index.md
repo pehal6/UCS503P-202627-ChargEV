@@ -15,4 +15,4 @@ The ChargEV project development:
 - **Week 1 — Project Proposal:** Contributed to user requirements and initial frontend planning.
 - **Week 2 — Frontend Research:** Researched responsive layouts, station cards, filters, maps and the booking interface.
 - **Week 3 — Frontend Development:** Started implementing the interface using **HTML, CSS, Bootstrap and JavaScript**.
-
+- ** Week 4: Backend Development Setup**
