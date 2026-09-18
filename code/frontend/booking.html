@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Charging Slot | chargEV</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- QR Code Generator CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b131e;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(18, 28, 43, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+        }
+
+        .btn-brand-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand-primary:hover {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            color: #ffffff;
+        }
+
+        .slot-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slot-pill:hover, .slot-pill.active {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #34d399;
+        }
+
+        .slot-pill.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-glass {
+            background: rgba(11, 19, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-[#0b131e]/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="/index.html" class="flex items-center gap-2 text-decoration-none">
+                    <span class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl shadow-lg shadow-emerald-500/10">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </span>
+                    <span class="text-2xl font-extrabold tracking-tight text-white">charg<span class="text-emerald-400">EV</span></span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-6">
+    <a href="/index.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Home</a>
+    <a href="/station.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Stations</a>
+    <a href="/booking.html" class="text-emerald-400 font-medium text-decoration-none">Book Slot</a>
+    <a href="/mybookings.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">My Bookings</a>
+    <a href="/dashboard.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Dashboard</a>
+    <a href="/about.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">About</a>
+    <a href="/contact.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Contact</a>
+</div>
+                <div class="flex items-center gap-3">
+                    <a href="/login.html" class="px-4 py-2 rounded-xl text-slate-300 border border-slate-700 hover:border-slate-500 hover:text-white font-medium text-sm transition text-decoration-none">Login</a>
+                    <a href="/register.html" class="btn-brand-primary px-4 py-2 rounded-xl text-sm text-decoration-none">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BOOKING SECTION -->
+    <section class="py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-3">
+                    <i class="fa-solid fa-calendar-check"></i> Instant Slot Reservation
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Reserve Your Charging Window</h1>
+                <p class="text-slate-400 text-sm mt-2">Select a Patiala station hub, choose your connector, and lock in your charging slot.</p>
+            </div>
+
+            <div class="glass-card p-6 sm:p-8 space-y-8 border border-slate-800">
+                
+                <!-- STEP 1: STATION SELECTION -->
+                <div class="space-y-4">
+                    <h3 class="text-white font-bold text-lg flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center border border-emerald-500/30">1</span>
+                        Select Charging Station
+                    </h3>
+                    
+                    <select id="stationSelect" onchange="updateStationDetails()" class="w-full bg-slate-900 text-slate-200 border border-slate-700/80 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 transition">
+                        <!-- JS injected options -->
+                    </select>
+
+                    <div id="selectedStationMeta" class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <!-- JS injected metadata -->
+                    </div>
+                </div>
+
+                <!-- STEP 2: CONNECTOR & DURATION -->
+                <div class="space-y-4 pt-4 border-t border-slate-800/80">
+                    <h3 class="text-white font-bold text-lg flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center border border-emerald-500/30">2</span>
+                        Connector & Duration
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs text-slate-400 mb-2 block font-medium">Connector Type</label>
+                            <select id="connectorSelect" onchange="calculateTariff()" class="w-full bg-slate-900 text-slate-200 border border-slate-700/80 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 transition">
+                                <option value="CCS2">CCS2 Ultra-Fast DC (up to 60 kW)</option>
+                                <option value="Type2">Type 2 Fast AC (7.4 kW)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 mb-2 block font-medium">Estimated Charging Duration</label>
+                            <select id="durationSelect" onchange="calculateTariff()" class="w-full bg-slate-900 text-slate-200 border border-slate-700/80 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 transition">
+                                <option value="30">30 Minutes (~20 kWh)</option>
+                                <option value="45" selected>45 Minutes (~30 kWh)</option>
+                                <option value="60">60 Minutes (~40 kWh)</option>
+                                <option value="90">90 Minutes (~55 kWh)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: TIME SLOT SELECTION -->
+                <div class="space-y-4 pt-4 border-t border-slate-800/80">
+                    <h3 class="text-white font-bold text-lg flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center border border-emerald-500/30">3</span>
+                        Select Time Slot (Today)
+                    </h3>
+
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-2" id="slotsContainer">
+                        <!-- JS injected slot pills -->
+                    </div>
+                </div>
+
+                <!-- ESTIMATED COST SUMMARY -->
+                <div class="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-slate-400 block font-medium">Estimated Booking Total</span>
+                        <span class="text-2xl font-extrabold text-emerald-400" id="totalPriceDisplay">INR 450.00</span>
+                        <span class="text-[11px] text-slate-400 block mt-0.5">*Includes energy tariff and port reservation fee</span>
+                    </div>
+
+                    <button onclick="confirmBooking()" class="btn-brand-primary w-full sm:w-auto px-8 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-lock"></i> Confirm & Generate QR Pass
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- QR PASS MODAL -->
+    <div id="qrModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="modal-glass max-w-md w-full p-6 text-center space-y-5 border border-emerald-500/30 relative">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mx-auto border border-emerald-500/40">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white">Booking Confirmed!</h3>
+                <p class="text-slate-400 text-xs mt-1">Scan this QR code at the charger terminal to unlock power delivery.</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl inline-block mx-auto" id="qrcode"></div>
+
+            <div class="bg-slate-900/90 p-3.5 rounded-xl text-left text-xs space-y-1.5 border border-slate-800">
+                <div class="flex justify-between"><span class="text-slate-400">Booking ID:</span><strong class="text-emerald-400" id="modalBookingId">EV-8921-PTL</strong></div>
+                <div class="flex justify-between"><span class="text-slate-400">Station:</span><span class="text-slate-200" id="modalStation">Patiala Station</span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Time Window:</span><span class="text-slate-200" id="modalSlot">11:00 AM</span></div>
+            </div>
+
+            <button onclick="closeModal()" class="w-full py-3 rounded-xl bg-slate-800 text-slate-200 font-semibold text-xs border border-slate-700 hover:bg-slate-700 transition">
+                Done & View Booking Details
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPT WITH REAL PATIALA STATIONS & DATABASE INTEGRATION -->
+    <script>
+        const patialaStations = [
+            { id: "st-pat-01", name: "Electric Vehicle Charging Station Patiala", location: "01, Kalyan, Punjab 147005", priceKwh: 18, power: "30 kW DC" },
+            { id: "st-pat-02", name: "Electric Vehicle Charging Station Focal", location: "C 71, Focal Point, Punjab 147004", priceKwh: 22, power: "60 kW DC" },
+            { id: "st-pat-03", name: "Kazam Charging Station Professor Colony", location: "Phase III, Urban Estate, Patiala", priceKwh: 15, power: "7.4 kW AC" },
+            { id: "st-pat-04", name: "ChargeZone Charging Station Rajpura", location: "DPG Hyundai, Rajpura Rd, Patiala", priceKwh: 18, power: "30 kW DC" },
+            { id: "st-pat-05", name: "Jio-bp pulse Charging Station Muradpur", location: "NH 7, Muradpur, Patiala 140701", priceKwh: 20, power: "60 kW DC" }
+        ];
+
+        const slotsList = [
+            "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+            "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM",
+            "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"
+        ];
+
+        let selectedSlot = "11:00 AM";
+
+        function initForm() {
+            const select = document.getElementById('stationSelect');
+            select.innerHTML = patialaStations.map(s => `<option value="${s.id}">${s.name} (${s.power})</option>`).join('');
+
+            // Pre-select if station ID passed in URL query
+            const urlParams = new URLSearchParams(window.location.search);
+            const stationParam = urlParams.get('station');
+            if (stationParam) {
+                select.value = stationParam;
+            }
+
+            renderSlots();
+            updateStationDetails();
+        }
+
+        function updateStationDetails() {
+            const id = document.getElementById('stationSelect').value;
+            const station = patialaStations.find(s => s.id === id);
+            const metaContainer = document.getElementById('selectedStationMeta');
+
+            metaContainer.innerHTML = `
+                <div>
+                    <span class="text-white font-bold text-sm block">${station.name}</span>
+                    <span class="text-slate-400 text-xs"><i class="fa-solid fa-location-dot me-1 text-emerald-400"></i>${station.location}</span>
+                </div>
+                <div class="text-right">
+                    <span class="text-emerald-400 font-extrabold text-sm block">INR ${station.priceKwh}/kWh</span>
+                    <span class="text-slate-400 text-xs">${station.power}</span>
+                </div>
+            `;
+            calculateTariff();
+        }
+
+        function renderSlots() {
+            const container = document.getElementById('slotsContainer');
+            container.innerHTML = slotsList.map((slot, index) => {
+                const isDisabled = index === 1 || index === 4; // Mock booked slots
+                const isActive = slot === selectedSlot;
+                return `
+                    <button onclick="selectSlot('${slot}', this)" class="slot-pill px-3 py-2 rounded-xl text-xs font-semibold ${isDisabled ? 'disabled' : ''} ${isActive ? 'active' : ''}" ${isDisabled ? 'disabled' : ''}>
+                        ${slot}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectSlot(slot, el) {
+            selectedSlot = slot;
+            document.querySelectorAll('.slot-pill').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function calculateTariff() {
+            const stationId = document.getElementById('stationSelect').value;
+            const station = patialaStations.find(s => s.id === stationId);
+            const durationMinutes = parseInt(document.getElementById('durationSelect').value);
+
+            // Estimated kWh delivered based on duration
+            const estimatedKwh = (durationMinutes / 60) * 35; 
+            const total = (estimatedKwh * station.priceKwh) + 25; // 25 INR base reservation fee
+
+            document.getElementById('totalPriceDisplay').innerText = `INR ${total.toFixed(2)}`;
+        }
+
+        async function confirmBooking() {
+            const stationId = document.getElementById('stationSelect').value;
+            const connector = document.getElementById('connectorSelect').value;
+            const duration = document.getElementById('durationSelect').value;
+            const priceText = document.getElementById('totalPriceDisplay').innerText;
+
+            const payload = {
+                stationId: stationId,
+                connector: connector,
+                durationMinutes: parseInt(duration),
+                timeSlot: selectedSlot,
+                totalPrice: priceText
+            };
+
+            try {
+                // Send data to backend API to store in MongoDB database
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const bookingId = data.bookingId;
+                    const station = patialaStations.find(s => s.id === stationId);
+
+                    document.getElementById('modalBookingId').innerText = bookingId;
+                    document.getElementById('modalStation').innerText = station ? station.name : stationId;
+                    document.getElementById('modalSlot').innerText = selectedSlot;
+
+                    // Generate QR Code
+                    document.getElementById('qrcode').innerHTML = "";
+                    new QRCode(document.getElementById("qrcode"), {
+                        text: bookingId,
+                        width: 140,
+                        height: 140,
+                        colorDark : "#0b131e",
+                        colorLight : "#ffffff"
+                    });
+
+                    document.getElementById('qrModal').classList.remove('hidden');
+                } else {
+                    alert("Booking Failed: " + (data.message || "Could not complete reservation"));
+                }
+            } catch (err) {
+                console.error("Booking Error:", err);
+                alert("Unable to reach backend server. Please verify your Node.js server is running.");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('qrModal').classList.add('hidden');
+        }
+
+        window.onload = function() {
+            initForm();
+        };
+    </script>
+</body>
+</html>
