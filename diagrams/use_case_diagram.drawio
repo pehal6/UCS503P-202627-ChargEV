@@ -1,0 +1,163 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ChargEV Use Case Diagram" id="chargev-usecase-1">
+    <mxGraphModel dx="1585" dy="822" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1250" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" value="&lt;b style=&#39;font-size:18px;color:#1a1a2e&#39;&gt;ChargEV – UML Use Case Diagram&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="500" x="380" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="sys_boundary" parent="1" style="shape=mxgraph.sysml.package;html=1;overflow=fill;whiteSpace=wrap;align=center;verticalAlign=top;spacingTop=5;strokeColor=#3b82f6;fillColor=none;strokeWidth=2;labelBackgroundColor=none;fontSize=14;fontColor=#2563eb;dashed=1;dashPattern=8 4;" value="&lt;b style=&#39;font-size:14px;&#39;&gt;ChargEV – Smart EV Charging Station Platform&lt;/b&gt;" vertex="1">
+          <mxGeometry height="720" width="960" x="180" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_driver" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#2563EB;fontSize=11;strokeWidth=2;" value="&lt;b&gt;EV Driver&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:9px;color:#666&#39;&gt;(Primary Actor)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_operator" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#EDE9FE;strokeColor=#7C3AED;fontColor=#7C3AED;fontSize=11;strokeWidth=2;" value="&lt;b&gt;Station Operator&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:9px;color:#666&#39;&gt;(Secondary Actor)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="40" x="1120" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_locapi" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#0D9488;fontColor=#0D9488;fontSize=11;fontStyle=1;strokeWidth=2;" value="&lt;b&gt;Location Services API&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:8px&#39;&gt;(Supporting Actor: Maps / Places / Directions)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="180" x="330" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_db" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FEE2E2;strokeColor=#DC2626;fontColor=#DC2626;fontSize=11;fontStyle=1;strokeWidth=2;" value="&lt;b&gt;MongoDB Atlas&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:8px&#39;&gt;(Supporting Actor)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="180" x="830" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_search" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#2563EB;fontSize=10;fontStyle=1;strokeWidth=2;" value="Search Nearby&lt;br&gt;Stations" vertex="1">
+          <mxGeometry height="80" width="140" x="250" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_viewdet" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#2563EB;fontSize=10;fontStyle=1;strokeWidth=2;" value="View Station&lt;br&gt;Details" vertex="1">
+          <mxGeometry height="80" width="140" x="450" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_book" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#2563EB;fontSize=10;fontStyle=1;strokeWidth=2;" value="Book Charging&lt;br&gt;Slot" vertex="1">
+          <mxGeometry height="80" width="140" x="650" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_navigate" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#2563EB;fontSize=10;fontStyle=1;strokeWidth=2;" value="Navigate to&lt;br&gt;Station" vertex="1">
+          <mxGeometry height="80" width="140" x="850" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_filters" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontColor=#F59E0B;fontSize=10;fontStyle=1;strokeWidth=2;" value="Apply Smart&lt;br&gt;Filters" vertex="1">
+          <mxGeometry height="80" width="140" x="250" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_avail" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontColor=#F59E0B;fontSize=10;fontStyle=1;strokeWidth=2;" value="Check Real-Time&lt;br&gt;Availability" vertex="1">
+          <mxGeometry height="80" width="140" x="450" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_trip" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontColor=#F59E0B;fontSize=10;fontStyle=1;strokeWidth=2;" value="Plan Multi-Stop&lt;br&gt;Trip" vertex="1">
+          <mxGeometry height="80" width="140" x="650" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_track" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontColor=#F59E0B;fontSize=10;fontStyle=1;strokeWidth=2;" value="Track Charging&lt;br&gt;Session" vertex="1">
+          <mxGeometry height="80" width="140" x="850" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_geocode" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#0D9488;fontColor=#0D9488;fontSize=10;fontStyle=1;strokeWidth=2;" value="Geocode&lt;br&gt;Location" vertex="1">
+          <mxGeometry height="80" width="140" x="300" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_places" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#0D9488;fontColor=#0D9488;fontSize=10;fontStyle=1;strokeWidth=2;" value="Fetch Places&lt;br&gt;Data" vertex="1">
+          <mxGeometry height="80" width="140" x="520" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_route" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#CCFBF1;strokeColor=#0D9488;fontColor=#0D9488;fontSize=10;fontStyle=1;strokeWidth=2;" value="Compute&lt;br&gt;Route" vertex="1">
+          <mxGeometry height="80" width="140" x="740" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_storebook" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontColor=#DC2626;fontSize=10;fontStyle=1;strokeWidth=2;" value="Store Booking&lt;br&gt;Record" vertex="1">
+          <mxGeometry height="80" width="140" x="300" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_updstatus" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontColor=#DC2626;fontSize=10;fontStyle=1;strokeWidth=2;" value="Update Station&lt;br&gt;Status" vertex="1">
+          <mxGeometry height="80" width="140" x="550" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_manage" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontColor=#7C3AED;fontSize=10;fontStyle=1;strokeWidth=2;" value="Manage Station&lt;br&gt;Inventory" vertex="1">
+          <mxGeometry height="80" width="140" x="800" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_utildash" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontColor=#7C3AED;fontSize=10;fontStyle=1;strokeWidth=2;" value="View Utilization&lt;br&gt;Dashboard" vertex="1">
+          <mxGeometry height="80" width="140" x="1020" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ecocoins" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;fontColor=#059669;fontSize=10;fontStyle=1;strokeWidth=2;" value="Earn&lt;br&gt;EcoCoins" vertex="1">
+          <mxGeometry height="80" width="140" x="380" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ecoimpact" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;fontColor=#059669;fontSize=10;fontStyle=1;strokeWidth=2;" value="View Eco-Impact&lt;br&gt;&amp; Badges" vertex="1">
+          <mxGeometry height="80" width="140" x="620" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_search" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_viewdet" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_book" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_navigate" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_filters" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_avail" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_trip" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_track" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_ecocoins" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="actor_driver" style="endArrow=none;html=1;strokeColor=#2563EB;strokeWidth=1.5;" target="uc_ecoimpact" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="actor_operator" style="endArrow=none;html=1;strokeColor=#7C3AED;strokeWidth=1.5;" target="uc_manage" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="actor_operator" style="endArrow=none;html=1;strokeColor=#7C3AED;strokeWidth=1.5;" target="uc_updstatus" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="actor_operator" style="endArrow=none;html=1;strokeColor=#7C3AED;strokeWidth=1.5;" target="uc_utildash" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="actor_locapi" style="endArrow=none;html=1;strokeColor=#0D9488;strokeWidth=1.5;" target="uc_geocode" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="actor_locapi" style="endArrow=none;html=1;strokeColor=#0D9488;strokeWidth=1.5;" target="uc_places" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="actor_locapi" style="endArrow=none;html=1;strokeColor=#0D9488;strokeWidth=1.5;" target="uc_route" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="actor_db" style="endArrow=none;html=1;strokeColor=#DC2626;strokeWidth=1.5;" target="uc_storebook" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="actor_db" style="endArrow=none;html=1;strokeColor=#DC2626;strokeWidth=1.5;" target="uc_updstatus" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="actor_db" style="endArrow=none;html=1;strokeColor=#DC2626;strokeWidth=1.5;" target="uc_utildash" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="uc_search" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_geocode" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="uc_search" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_places" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="uc_book" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_avail" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="uc_book" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_storebook" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="uc_navigate" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_route" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="uc_trip" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_route" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="uc_track" style="endArrow=open;html=1;dashed=1;strokeColor=#666;fontSize=9;fontColor=#666;" target="uc_updstatus" value="&lt;&lt;include&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="uc_filters" style="endArrow=open;html=1;dashed=1;strokeColor=#999;fontSize=9;fontColor=#999;" target="uc_search" value="&lt;&lt;extend&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="uc_ecocoins" style="endArrow=open;html=1;dashed=1;strokeColor=#999;fontSize=9;fontColor=#999;" target="uc_track" value="&lt;&lt;extend&gt;&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | chargEV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Charg<span>ENG</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="station.html">Stations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mybooking.html">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profile.html">Profile</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-outline-light btn-sm" href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-5 mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-box text-start">
+                    <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+                        <i class="bi bi-person-circle text-success fs-1"></i>
+                        <div>
+                            <h3 class="fw-bold mb-0">Account Settings</h3>
+                            <p class="text-muted mb-0 small">Manage your personal details and vehicle configuration.</p>
+                        </div>
+                    </div>
+
+                    <form id="profile-form">
+                        <h5 class="fw-bold mb-3 text-success"><i class="bi bi-person me-2"></i>Personal Info</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" value="Rohini" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" value="rohini@example.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" value="+91 98765 43210">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" value="Jalandhar">
+                            </div>
+                        </div>
+
+                        <h5 class="fw-bold mb-3 text-success"><i class="bi bi-car-front me-2"></i>EV Vehicle Details</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Vehicle Model</label>
+                                <input type="text" class="form-control" placeholder="e.g. Tata Nexon EV Max">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Connector Standard</label>
+                                <select class="form-select">
+                                    <option value="CCS2" selected>CCS2 (Combined Charging System)</option>
+                                    <option value="Type 2">Type 2 (AC Charging)</option>
+                                    <option value="CHAdeMO">CHAdeMO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3 mt-4">
+                            <button type="submit" class="btn btn-green fw-bold px-4">Save Changes</button>
+                            <button type="reset" class="btn btn-outline-secondary px-4">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 chargEV. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

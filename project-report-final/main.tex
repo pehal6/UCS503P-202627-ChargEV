@@ -1,0 +1,917 @@
+\documentclass{tietreport}
+
+% Essential packages
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    hidelinks,
+    colorlinks=false,
+    pdfborder={0 0 0}
+}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.97,0.98,0.99}
+\definecolor{codeblue}{rgb}{0.13,0.29,0.53}
+
+\lstdefinelanguage{JS}{
+  keywords={const,let,var,function,if,else,return,await,async,new,true,false,null,document,window,localStorage},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  morestring=[b]`
+}
+
+\lstdefinestyle{jsstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=6pt,
+    showspaces=false,
+    showstringspaces=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{black!20},
+    xleftmargin=12pt,
+    framexleftmargin=10pt,
+    aboveskip=8pt,
+    belowskip=6pt,
+    language=JS
+}
+\lstset{style=jsstyle}
+
+\setlength{\headheight}{15pt}
+
+% Bibliography configuration
+\usepackage[
+  date=year,
+  style=alphabetic,
+  backend=bibtex,
+  sorting=nty,
+  maxnames=5,
+  minnames=3,
+  maxalphanames=4,
+  minalphanames=3,
+  backref=true,
+  doi=false,
+  isbn=false,
+  url=false,
+  eprint=false
+]{biblatex}
+\addbibresource{references.bib}
+
+% ---------------------------------------------------------------
+% Helpers
+% ---------------------------------------------------------------
+% Highlighted reminder for content that still has to be filled in.
+% Search for "TODO" in this file before submission.
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+% \shot[width]{file-in-images/}{caption}{label}
+% Includes images/<file> if present; otherwise draws a visible placeholder
+% so the report still compiles before all screenshots are added.
+\newcommand{\shot}[4][0.9]{%
+  \begin{figure}[htbp]
+    \centering
+    \IfFileExists{images/#2}{%
+      \includegraphics[width=#1\textwidth]{images/#2}%
+    }{%
+      \fbox{\parbox[c][5cm][c]{0.8\textwidth}{\centering
+        \textcolor{red}{Screenshot placeholder: \texttt{images/\detokenize{#2}}}}}%
+    }
+    \caption{#3}
+    \label{#4}
+  \end{figure}%
+}
+
+%% ==================================================
+%% PROJECT-SPECIFIC FIELDS -- CHARGEV
+%% ==================================================
+
+\TitlePageHeader{%
+  UCS503P - Software Engineering Project%
+}
+
+\ProjectTitle{%
+  ChargEV: Find. Charge. Go Green.%
+}
+
+\ProjectSubTitle{%
+  The Smart EV Charging Station Platform%
+}
+
+\author{%
+  \texttt{1024170103} Pehal \\
+  \texttt{1024170431} Briti Arora%
+}
+
+\TitlePageSubText{%
+  Group: BE Third Year, CSE%
+}
+
+\AdvisorName{%
+  Dr. Nisha Thakur%
+}
+
+\TitlePageFooterText{{%
+    \large End Semester Evaluation \\[0.2cm]
+    \bfseries Computer Science and Engineering
+    Department%
+  } \\[0.15cm]
+  Thapar Institute of Engineering and Technology,
+  Patiala%
+}
+
+%% ==================================================
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% =====================================================================
+% CHAPTER 1: INTRODUCTION
+% =====================================================================
+
+\chapter{Introduction}
+
+\section{Background and Context}
+
+Electric vehicle (EV) adoption is accelerating, but the
+charging infrastructure that supports it has not kept
+pace in terms of usability. Drivers routinely do not
+know which nearby stations are actually free, whether a
+connector will be compatible with their vehicle, or
+whether they will have to wait once they arrive. This
+project, \textbf{ChargEV}, removes this uncertainty by
+giving EV drivers a single, reliable web platform to
+discover charging stations, check real-time availability,
+and reserve a slot in advance -- turning charging from a
+source of anxiety into a predictable, routine task.
+
+The platform follows a simple user journey:
+\textbf{Discover $\rightarrow$ Book $\rightarrow$ Charge
+$\rightarrow$ Engage}. ChargEV combines location
+services, real-time availability, online booking and a
+gamified rewards layer (``EcoCoins'') in one interface.
+
+\subsection{Problem Statement}
+
+While EV charging infrastructure continues to expand,
+the tools available to EV drivers to actually use that
+infrastructure remain fragmented and unreliable. The
+specific problems this project addresses are:
+
+\begin{itemize}
+  \item \textbf{Discovery gap:} it is hard to find nearby
+    charging stations from a single, reliable source.
+  \item \textbf{Unclear availability:} station status
+    (free, occupied, out of service) is rarely known
+    before arriving.
+  \item \textbf{Wasted time:} drivers wait at busy
+    stations with no way to reserve a slot in advance.
+  \item \textbf{Generic search results:} existing tools
+    do not let drivers filter by connector type,
+    distance, availability, and price together.
+  \item \textbf{Difficult trip planning:} long-distance EV
+    travel requires manually chaining together charging
+    stops.
+  \item \textbf{Low engagement:} there is little incentive
+    for drivers to keep returning to a single platform.
+\end{itemize}
+
+\section{Project Objectives}
+
+\begin{enumerate}
+  \item \textbf{Centralized Station Locator:} build a
+    single source of truth for nearby EV charging
+    stations, searchable by location.
+  \item \textbf{Real-Time Availability \& Smart Booking:}
+    deliver a live availability view and an online slot
+    booking and reservation system so drivers can
+    guarantee a charge before they leave.
+  \item \textbf{Smart Search and Trip Planning:} provide
+    filters by connector type, distance, availability and
+    price, and extend this into route-aware trip planning
+    for long-distance travel.
+  \item \textbf{Engagement Layer:} implement a gamified
+    rewards system (``EcoCoins'') that tracks savings and
+    eco-impact to encourage repeat usage.
+  \item \textbf{Operator Tools:} let station operators
+    manage station inventory, update charger status and
+    view utilization.
+\end{enumerate}
+
+\section{Report Organization}
+
+Chapter~2 describes the methodology, architecture and the
+complete set of UML and data-flow models. Chapter~3
+documents the implementation module by module. Chapter~4
+presents the testing approach, test cases and the
+user-interface results. Chapter~5 concludes with
+limitations and future work.
+
+% =====================================================================
+% CHAPTER 2: METHODOLOGY AND DESIGN
+% =====================================================================
+
+\chapter{Methodology and Design}
+
+\section{System Architecture and Design Methodology}
+
+The first weeks of the semester were spent on
+requirement analysis and system modelling, so that the
+frontend and backend could be developed in parallel
+against a shared blueprint. The system follows a
+\textbf{three-tier web architecture}
+(Figure~\ref{fig:deployment}):
+
+\begin{itemize}
+  \item \textbf{Presentation tier:} HTML5, CSS3,
+    Bootstrap 5 and JavaScript pages running in the
+    user's browser.
+  \item \textbf{Application tier:} a Node.js and
+    Express.js REST API that implements the authentication,
+    station, booking, trip and rewards modules.
+  \item \textbf{Data and services tier:} MongoDB Atlas
+    for persistent storage, accessed through Mongoose,
+    and the Google Maps Platform (Maps, Places and
+    Directions APIs) for geocoding, place data and
+    routing.
+\end{itemize}
+
+\subsection{Technical Stack}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Layer} & \textbf{Technology} \\
+    \midrule
+    Frontend & HTML5, CSS3, Bootstrap 5, JavaScript (fetch API) \\
+    Backend & Node.js, Express.js (REST API) \\
+    Database & MongoDB Atlas, accessed through Mongoose schemas \\
+    Location intelligence & Google Maps, Places and Directions APIs \\
+    Real-time updates & WebSocket events for live port-count updates \\
+    Documentation & \LaTeX\ report, draw.io diagrams, MkDocs site \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Technology stack of ChargEV.}
+  \label{tab:stack}
+\end{table}
+
+\section{System Modeling and Project Diagrams}
+\label{sec:diagrams}
+
+The following models were developed and cross-checked
+against the project proposal. Together they describe the
+system's requirements, behaviour, data flow, structure
+and deployment.
+
+\subsection{Requirements and Behavioural Models}
+
+\begin{itemize}
+  \item The \textbf{Use Case Diagram}
+    (Figure~\ref{fig:usecase}) identifies the system
+    boundary, the EV Driver (primary actor), the Station
+    Operator (secondary actor) and the supporting actors
+    -- the Location Services API and MongoDB Atlas. It
+    defines 17 use cases, each documented with a use case
+    template (Appendix~\ref{app:uc}).
+  \item The \textbf{Activity Diagram}
+    (Figure~\ref{fig:activity}) maps the step-by-step
+    workflow of a station search.
+  \item The \textbf{Swimlane Activity Diagram}
+    (Figure~\ref{fig:swimlanes}) distributes the complete
+    search--book--charge flow across the EV
+    Driver/Frontend, the Backend API, Location Services
+    and MongoDB Atlas.
+  \item The \textbf{Sequence Diagram}
+    (Figure~\ref{fig:sequence}) shows the chronological
+    message exchange during a station search and booking,
+    and the \textbf{Collaboration Diagram}
+    (Figure~\ref{fig:collaboration}) shows the same
+    interaction as numbered links between components.
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/use_case_diagram.drawio.pdf}
+  \caption{UML Use Case Diagram of ChargEV.}
+  \label{fig:usecase}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{diagrams/activity_diagram.drawio.pdf}
+  \caption{UML Activity Diagram for the station search workflow.}
+  \label{fig:activity}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/activity_diagram_swimlanes.drawio.pdf}
+  \caption{UML Swimlane Activity Diagram: EV Driver/Frontend, Backend API, Location Services and MongoDB Atlas.}
+  \label{fig:swimlanes}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/Sequence_Diagram.drawio.pdf}
+  \caption{UML Sequence Diagram: search and book a charging slot.}
+  \label{fig:sequence}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/Collaboration_Diagram.drawio.pdf}
+  \caption{UML Collaboration Diagram of the search and booking interaction.}
+  \label{fig:collaboration}
+\end{figure}
+
+\subsection{Data Flow Models}
+
+The \textbf{Level~0 DFD} (Figure~\ref{fig:dfd0}) treats
+ChargEV as a single process and shows its exchanges with
+three external entities: the EV Driver, the Station
+Operator and the Google Maps Platform. The
+\textbf{Level~1 DFD} (Figure~\ref{fig:dfd1}) decomposes the
+system into six processes -- authentication and profile
+(1.0), station search and filtering (2.0), trip planning
+and navigation (3.0), slot booking and session tracking
+(4.0), rewards and eco-impact (5.0) and station management
+and utilization (6.0) -- and four data stores: Users (D1),
+Stations \& Chargers (D2), Bookings (D3) and Rewards (D4).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/dfd_level_0.drawio.pdf}
+  \caption{Level 0 Data Flow Diagram (context diagram).}
+  \label{fig:dfd0}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/dfd_level_1.drawio.pdf}
+  \caption{Level 1 Data Flow Diagram.}
+  \label{fig:dfd1}
+\end{figure}
+
+\subsection{Structural and Deployment Models}
+
+The \textbf{Class Diagram} (Figure~\ref{fig:class}) defines
+the core entities -- User, Operator, Station, Charger and
+Booking -- with their attributes, operations and
+multiplicities. The \textbf{Component Diagram}
+(Figure~\ref{fig:component}) groups the frontend pages,
+backend modules and external services, and the
+\textbf{Deployment Diagram} (Figure~\ref{fig:deployment})
+maps the software artifacts onto the client device, the
+application server, MongoDB Atlas and the Google Maps
+Platform. The \textbf{Gantt Chart} (Figure~\ref{fig:gantt})
+captures the development plan.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/class_diagram.pdf}
+  \caption{UML Class Diagram.}
+  \label{fig:class}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/component_diagram.pdf}
+  \caption{UML Component Diagram.}
+  \label{fig:component}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/deployment_diagram.drawio.pdf}
+  \caption{UML Deployment Diagram.}
+  \label{fig:deployment}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{diagrams/gantt_chart.drawio.pdf}
+  \caption{Project timeline (Gantt Chart).}
+  \label{fig:gantt}
+\end{figure}
+
+% =====================================================================
+% CHAPTER 3: CODING AND IMPLEMENTATION
+% =====================================================================
+
+\chapter{Coding and Implementation}
+
+\section{Software Architecture and Subsystem Overview}
+
+The code base is organised into a static, multi-page
+frontend and a Node.js/Express backend. The frontend
+talks to the backend exclusively through JSON REST calls
+made with the browser \texttt{fetch} API, and receives
+live port-availability updates over a WebSocket
+connection. Table~\ref{tab:endpoints} lists the REST
+endpoints used by the frontend.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{llX}
+    \toprule
+    \textbf{Method} & \textbf{Endpoint} & \textbf{Purpose} \\
+    \midrule
+    POST & \texttt{/api/auth/login} & Authenticate a user and return a token and profile \\
+    GET  & \texttt{/api/stations}   & Return the list of charging stations \\
+    POST & \texttt{/api/bookings}   & Create a slot booking for a station \\
+    \bottomrule
+  \end{tabularx}
+  \caption{REST endpoints consumed by the frontend.}
+  \label{tab:endpoints}
+\end{table}
+
+\todo{add any further endpoints implemented in server.js (register, my bookings, trip planning, rewards) to Table~\ref{tab:endpoints}}
+
+\shot[0.55]{code_project_structure.png}{Project folder structure of the ChargEV code base.}{fig:code-structure}
+
+\section{User Interface and Frontend Implementation}
+
+The frontend is a responsive multi-page application built
+with HTML5, CSS3 and Bootstrap 5, using a dark,
+EV-themed visual identity. Table~\ref{tab:pages} lists the
+pages and the use cases they realise.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{llX}
+    \toprule
+    \textbf{Page} & \textbf{File} & \textbf{Description} \\
+    \midrule
+    Home & \texttt{index.html} & Hero search bar, quick filters, nearest-station preview \\
+    Stations & \texttt{station.html} & Station directory with map and list view \\
+    Book Slot & \texttt{booking.html} & Station, date, time slot and connector selection \\
+    Payment & \texttt{payment.html} & Booking payment step \\
+    My Bookings & \texttt{mybookings.html} & A driver's scheduled sessions \\
+    Dashboard & \texttt{dashboard.html} & Charging session telemetry and saved bookings \\
+    Login / Register & \texttt{login.html}, \texttt{register.html} & Authentication and onboarding \\
+    Profile & \texttt{profile.html} & Vehicle model and connector preference \\
+    About / Contact & \texttt{about.html}, \texttt{contact.html} & Information pages \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Frontend pages of ChargEV.}
+  \label{tab:pages}
+\end{table}
+
+Client-side logic is split by concern: \texttt{script.js}
+handles the home page and booking form,
+\texttt{station.js} renders the station list,
+\texttt{login.js} performs authentication, and
+\texttt{Contact.js} handles the contact form. The
+interface is made responsive with Bootstrap's grid and
+form controls validate input through HTML5 attributes and
+JavaScript event listeners.
+
+\section{Module 1: Authentication and User Profile}
+
+Users register with a name, e-mail and password, and may
+store their city, EV model and preferred connector type
+(default \texttt{CCS2}). The user record is defined by a
+Mongoose schema (Listing~\ref{lst:user}); the e-mail is
+unique and timestamps are maintained automatically.
+
+\begin{lstlisting}[caption={Mongoose schema of the User model.},label={lst:user}]
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    phone: { type: String, default: '' },
+    city: { type: String, default: '' },
+    evModel: { type: String, default: '' },
+    connectorType: { type: String, default: 'CCS2' }
+}, { timestamps: true });
+\end{lstlisting}
+
+On login, the frontend posts the credentials to
+\texttt{/api/auth/login}. On success, the returned token
+and user object are kept in \texttt{localStorage} and the
+user is redirected to the home page; on failure, the error
+message returned by the server is shown in an alert
+(Listing~\ref{lst:login}).
+
+\begin{lstlisting}[caption={Login request handling in \texttt{login.js}.},label={lst:login}]
+const res = await fetch('http://localhost:5000/api/auth/login', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password })
+});
+const data = await res.json();
+if (res.ok) {
+  localStorage.setItem('token', data.token);
+  localStorage.setItem('user', JSON.stringify(data.user));
+  localStorage.setItem('isLoggedIn', 'true');
+  window.location.href = 'index.html';
+}
+\end{lstlisting}
+
+\todo{describe how the server hashes passwords and issues the token (e.g. bcrypt / JWT) and add a code screenshot of the auth route}
+
+\shot[0.8]{code_auth_route.png}{Backend authentication route (code screenshot).}{fig:code-auth}
+
+\section{Module 2: Station Locator and Smart Filters}
+
+The station list is fetched from \texttt{/api/stations} and
+rendered as Bootstrap cards showing the station name,
+price per hour, supported connector types and a
+\emph{Book Slot} button that carries the station
+identifier to the booking page
+(Listing~\ref{lst:stations}). If the list is empty or the
+server cannot be reached, the page shows an informative
+message instead of failing silently.
+
+\begin{lstlisting}[caption={Fetching and rendering stations in \texttt{station.js}.},label={lst:stations}]
+const res = await fetch('http://localhost:5000/api/stations');
+const stations = await res.json();
+stationList.innerHTML = stations.map(station => `
+  <div class="card mb-3 shadow-sm border-0 rounded-3">
+    <div class="card-body">
+      <h5 class="card-title text-success fw-bold">${station.name}</h5>
+      <p class="card-text mb-1"><strong>Price:</strong> Rs.${station.pricePerHour}/hr</p>
+      <a href="booking.html?stationId=${station._id}" class="btn btn-success btn-sm">Book Slot</a>
+    </div>
+  </div>`).join('');
+\end{lstlisting}
+
+\todo{describe the filters (distance, connector type, availability, price) and the Google Maps / Places integration as implemented, and add a code screenshot}
+
+\shot[0.8]{code_stations_route.png}{Backend station route and filtering logic (code screenshot).}{fig:code-stations}
+
+\section{Module 3: Slot Booking and Real-Time Availability}
+
+A booking captures the station, date, time slot, connector
+type and vehicle number, and is submitted to
+\texttt{/api/bookings} (Listing~\ref{lst:booking}). On
+success the user is taken to the bookings page; on failure
+the server's message is displayed. Each booking is stored
+using the \texttt{Booking} schema
+(Listing~\ref{lst:bookingmodel}), which assigns a unique
+\texttt{bookingId} and records the connector, duration,
+time slot and total price.
+
+\begin{lstlisting}[caption={Booking submission in \texttt{script.js}.},label={lst:booking}]
+const bookingData = {
+    stationId: selectedId,
+    stationName: activeStation ? activeStation.name : 'EV Hub',
+    date: bookingDate.value,
+    timeSlot: timeSlot.value,
+    connectorType: document.getElementById('connectorType').value,
+    vehicleNumber: document.getElementById('vehicleNumber').value.trim()
+};
+const response = await fetch('/api/bookings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bookingData)
+});
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Mongoose schema of the Booking model.},label={lst:bookingmodel}]
+const BookingSchema = new mongoose.Schema({
+    bookingId: { type: String, required: true, unique: true },
+    stationId: { type: String, required: true },
+    connector: { type: String, required: true },
+    durationMinutes: { type: Number, required: true },
+    timeSlot: { type: String, required: true },
+    totalPrice: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+});
+\end{lstlisting}
+
+\textbf{Live availability.} The station cards subscribe to
+a \texttt{port\_count\_updated} WebSocket event. When the
+server reports a new number of free ports for a station,
+the badge on the corresponding card is updated without a
+page reload: green when more than one port is free, amber
+when exactly one is free and red when none is free
+(Listing~\ref{lst:ws}).
+
+\begin{lstlisting}[caption={Live port-count updates in \texttt{script.js}.},label={lst:ws}]
+socket.on('port_count_updated', (data) => {
+    const badge = document.getElementById(`badge-${data.stationId}`);
+    if (badge) {
+        badge.innerText = `${data.availablePorts} ${data.availablePorts === 1 ? 'Port' : 'Ports'} Free`;
+        badge.className = `... badge ${data.availablePorts > 1 ? 'bg-success'
+            : (data.availablePorts === 1 ? 'bg-warning text-dark' : 'bg-danger')} ...`;
+    }
+});
+\end{lstlisting}
+
+\todo{add a code screenshot of the booking route (slot-conflict check, bookingId generation, port-count update)}
+
+\shot[0.8]{code_booking_route.png}{Backend booking route (code screenshot).}{fig:code-booking}
+
+\section{Module 4: Trip Planning and Navigation}
+
+\todo{describe the trip planning module as implemented (Google Directions API, charging stops along the route); if it was not implemented, state this here and move it to Limitations}
+
+\shot[0.8]{code_trip_planner.png}{Trip planning module (code screenshot).}{fig:code-trip}
+
+\section{Module 5: EcoCoins, Rewards and Eco-Impact}
+
+\todo{describe the EcoCoins earning rules, badges and eco-impact calculation as implemented; if not implemented, state this and move it to Limitations}
+
+\shot[0.8]{code_ecocoins.png}{EcoCoins and rewards module (code screenshot).}{fig:code-eco}
+
+\section{Module 6: Station Operator Tools}
+
+\todo{describe the operator functions as implemented (add station, update charger status, utilization dashboard); if not implemented, state this and move it to Limitations}
+
+\section{Backend Server and Database Integration}
+
+The Express server exposes the REST endpoints of
+Table~\ref{tab:endpoints}, connects to MongoDB Atlas
+through Mongoose and broadcasts port-count changes over
+WebSocket. The frontend expects the server on
+\texttt{localhost:5000} during development.
+
+\todo{add a code screenshot of server.js (Express setup, CORS, MongoDB connection) and the .env variable names (without secret values)}
+
+\shot[0.8]{code_server.png}{Express server setup and MongoDB Atlas connection (code screenshot).}{fig:code-server}
+
+% =====================================================================
+% CHAPTER 4: RESULTS AND EVALUATION
+% =====================================================================
+
+\chapter{Results and Evaluation}
+
+\section{Testing Methodology}
+
+Testing combined design validation and functional testing
+of the implemented system:
+
+\begin{itemize}
+  \item \textbf{Design validation:} the UML and DFD models
+    were cross-checked against the proposal and against
+    each other (for example, every Level~1 process maps
+    to one or more use cases, and every data store maps
+    to a class or module of the backend).
+  \item \textbf{Functional (black-box) testing:} each
+    test case in Section~\ref{sec:testcases} exercises one
+    use case through the user interface and compares the
+    observed behaviour with the expected result.
+  \item \textbf{Interface testing:} all pages were
+    checked on desktop and mobile viewport sizes, and
+    form input validation was checked with valid and
+    invalid data.
+  \item \textbf{Integration testing:} the frontend was
+    exercised against the running Express server and
+    MongoDB Atlas database.
+\end{itemize}
+
+\section{Software Engineering Test Cases}
+\label{sec:testcases}
+
+Table~\ref{tab:tests} lists the functional test cases
+derived from the use cases. The last column is the
+recorded outcome of each run.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{l l X X c}
+    \toprule
+    \textbf{ID} & \textbf{Use case} & \textbf{Steps / input} & \textbf{Expected result} & \textbf{Result} \\
+    \midrule
+    TC-01 & Register & Submit the register form with valid details & Account is created and user can log in & $\square$ P $\square$ F \\
+    TC-02 & Register & Submit with an e-mail that already exists & Error message; no duplicate account & $\square$ P $\square$ F \\
+    TC-03 & Login & Valid e-mail and password & Token stored; redirected to home page & $\square$ P $\square$ F \\
+    TC-04 & Login & Wrong password & ``Invalid Credentials'' message shown & $\square$ P $\square$ F \\
+    TC-05 & Search stations & Open the stations page with the server running & Station cards with price and connectors are listed & $\square$ P $\square$ F \\
+    TC-06 & Search stations & Open the stations page with the server stopped & ``Failed to connect'' message, no crash & $\square$ P $\square$ F \\
+    TC-07 & Apply filters & Filter by connector type / availability / price & Only matching stations are shown & $\square$ P $\square$ F \\
+    TC-08 & Check availability & Free or occupy a port while the page is open & Port badge updates live and changes colour & $\square$ P $\square$ F \\
+    TC-09 & Book slot & Select station, date, slot, connector, vehicle number and confirm & Booking saved; success message; appears in My Bookings & $\square$ P $\square$ F \\
+    TC-10 & Book slot & Book a slot that is already taken & Booking is rejected with a clear message & $\square$ P $\square$ F \\
+    TC-11 & Book slot & Submit with a required field empty & Form validation blocks submission & $\square$ P $\square$ F \\
+    TC-12 & View bookings & Open My Bookings after booking & Booking ID, station, time, cost and status shown & $\square$ P $\square$ F \\
+    TC-13 & Plan trip & Enter origin and destination & Route with charging stops is displayed & $\square$ P $\square$ F \\
+    TC-14 & Earn EcoCoins & Complete a booking / session & EcoCoin balance increases & $\square$ P $\square$ F \\
+    TC-15 & Update station status & Operator marks a charger busy / free & Availability changes for drivers & $\square$ P $\square$ F \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Functional test cases for ChargEV.}
+  \label{tab:tests}
+\end{table}
+
+\todo{run each test case, tick Pass/Fail in Table~\ref{tab:tests}, and delete the rows for features that were not implemented}
+
+\section{Performance Metrics}
+
+The proposal defines the metrics used to judge ChargEV's
+booking workflow (Table~\ref{tab:metrics}).
+
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\textwidth}{lX}
+  \toprule
+  \textbf{Metric} & \textbf{Definition / Target} \\
+  \midrule
+  Time-to-Charge (TTC) & Time from opening the app to
+    starting a charge at a booked slot; the target is a
+    lower median TTC than a no-booking, walk-in
+    baseline. \\
+  Booking Conversion Rate & Percentage of station
+    searches that convert into a confirmed booking. \\
+  Availability Data Accuracy & Agreement between the
+    displayed station status and the actual status
+    observed on arrival. \\
+  User Engagement & Repeat-usage rate and EcoCoins
+    accumulated per active user. \\
+  \bottomrule
+\end{tabularx}
+\caption{Evaluation metrics framework for the ChargEV booking workflow.}
+\label{tab:metrics}
+\end{table}
+
+\todo{if any measurements were taken (for example API response time or page load time), add them here; otherwise keep this section as the framework for future evaluation}
+
+\section{User Interface Results}
+
+The figures below show the implemented interface.
+
+\shot{ui_home.png}{Home page: hero search, quick filters and nearest-station preview.}{fig:ui-home}
+\shot{ui_stations.png}{Stations page: station list with live port-availability badges.}{fig:ui-stations}
+\shot{ui_booking.png}{Booking page: slot, connector and vehicle selection.}{fig:ui-booking}
+\shot{ui_payment.png}{Payment page.}{fig:ui-payment}
+\shot{ui_mybookings.png}{My Bookings: scheduled charging sessions.}{fig:ui-mybookings}
+\shot{ui_dashboard.png}{Dashboard: charging session telemetry and saved bookings.}{fig:ui-dashboard}
+\shot[0.6]{ui_login.png}{Login page.}{fig:ui-login}
+\shot[0.6]{ui_register.png}{Create Account page.}{fig:ui-register}
+\shot[0.6]{ui_profile.png}{Profile page: vehicle model and connector preference.}{fig:ui-profile}
+
+\section{Analysis}
+
+Building the frontend in the shape defined by the Use
+Case and Sequence diagrams meant that every screen already
+matched the data returned by the backend, so integration
+needed little UI refactoring. The Swimlane Activity and
+Level~1 DFD models fixed the responsibility boundaries
+between the frontend, the Express API, MongoDB Atlas and
+the Google APIs before the backend was written, which
+shaped how the station and booking modules were scoped.
+The live WebSocket badge removes the main uncertainty a
+driver faces on arrival -- whether a port is free -- and
+the booking form removes the wait by reserving a slot in
+advance.
+
+% =====================================================================
+% CHAPTER 5: CONCLUSION
+% =====================================================================
+
+\chapter{Conclusion and Summary}
+
+\section{Summary of Work}
+
+\begin{itemize}
+  \item Defined the problem scope, objectives and
+    technology stack, and produced the project proposal.
+  \item Completed the full model set: Use Case, Activity,
+    Swimlane Activity, Sequence, Collaboration, Class,
+    Component, Deployment, Level~0 and Level~1 DFD
+    diagrams, 17 use case templates and a Gantt chart.
+  \item Built a responsive multi-page frontend covering
+    discovery, booking, bookings history, dashboard and
+    account management.
+  \item Implemented the Node.js/Express backend with
+    MongoDB Atlas persistence and live port-availability
+    updates.
+\end{itemize}
+
+\section{Key Findings}
+
+\begin{itemize}
+  \item Modelling before coding (use cases, sequence and
+    data-flow diagrams) gave both team members a shared
+    contract, so frontend and backend work could proceed
+    in parallel and integrate cleanly.
+  \item Real-time availability and advance booking
+    address the two largest pain points of EV charging:
+    not knowing whether a port is free, and waiting for
+    one.
+  \item Defining the data stores early (Users, Stations
+    \& Chargers, Bookings, Rewards) kept the Mongoose
+    schemas consistent with the DFD and class diagrams.
+\end{itemize}
+
+\section{Software Engineering Contributions}
+
+The project applied the full software engineering
+life cycle: requirement analysis and use case
+specification, UML and data-flow modelling, architectural
+design, incremental implementation, functional testing,
+and version-controlled collaboration on GitHub with a
+weekly development journal.
+
+\section{Limitations}
+
+\begin{itemize}
+  \item Authentication relies on a token stored in
+    \texttt{localStorage}, which is acceptable for a
+    prototype but should be hardened for production.
+  \item Station availability depends on data entered by
+    operators; there is no integration with physical
+    charger hardware.
+  \item The payment step is a prototype and does not
+    process real transactions.
+  \item \todo{list any modules from Chapter~3 that were not fully implemented, e.g. trip planning, EcoCoins, operator tools}
+\end{itemize}
+
+\section{Future Work and Recommendations}
+
+\begin{enumerate}
+  \item Integrate a real payment gateway and charger
+    hardware status via OCPP.
+  \item Add automated unit and integration tests and a
+    CI/CD pipeline.
+  \item Extend trip planning with battery-range and
+    charging-speed aware route optimisation.
+  \item Build native mobile clients and push
+    notifications for booking reminders.
+  \item Add richer eco-impact analytics and community
+    features to the rewards layer.
+\end{enumerate}
+
+\section{Final Remarks}
+
+ChargEV demonstrates that a single platform can bring
+discovery, availability, booking and engagement together
+for EV drivers. The models, code and documentation
+produced in this project form a solid base for taking the
+system from a prototype to a deployable service.
+
+% =====================================================================
+% APPENDIX
+% =====================================================================
+
+\appendix
+
+\chapter{Use Case Templates}
+\label{app:uc}
+
+The complete use case templates are available in the
+repository under \texttt{diagrams/use\_case\_templates/}.
+Table~\ref{tab:uclist} lists the 17 use cases.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{lXl}
+    \toprule
+    \textbf{ID} & \textbf{Use case} & \textbf{Primary actor} \\
+    \midrule
+    UC-01 & Search Nearby Stations & EV Driver \\
+    UC-02 & View Station Details & EV Driver \\
+    UC-03 & Apply Smart Filters & EV Driver \\
+    UC-04 & Check Real-Time Availability & EV Driver \\
+    UC-05 & Book Charging Slot & EV Driver \\
+    UC-06 & Navigate to Station & EV Driver \\
+    UC-07 & Plan Multi-Stop Trip & EV Driver \\
+    UC-08 & Track Charging Session & EV Driver \\
+    UC-09 & Geocode Location & Location Services API \\
+    UC-10 & Fetch Places Data & Location Services API \\
+    UC-11 & Compute Route & Location Services API \\
+    UC-12 & Store Booking Record & MongoDB Atlas \\
+    UC-13 & Update Station Status & Station Operator \\
+    UC-14 & Manage Station Inventory & Station Operator \\
+    UC-15 & View Utilization Dashboard & Station Operator \\
+    UC-16 & Earn EcoCoins & EV Driver \\
+    UC-17 & View Eco-Impact and Badges & EV Driver \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Use cases of ChargEV.}
+  \label{tab:uclist}
+\end{table}
+
+% ===== BIBLIOGRAPHY =====
+\nocite{*}
+\printbibliography[heading=bibintoc]
+
+\end{document}

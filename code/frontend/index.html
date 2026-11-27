@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chargEV | India's Smart EV Charging Network</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b131e;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism card effects */
+        .glass-card {
+            background: rgba(18, 28, 43, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-brand-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand-primary:hover {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            color: #ffffff;
+        }
+
+        .filter-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .filter-chip.active, .filter-chip:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: #10b981;
+            color: #34d399;
+        }
+
+        .status-badge-available {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge-inuse {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SYNCHRONIZED NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-[#0b131e]/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="/index.html" class="flex items-center gap-2 text-decoration-none">
+                    <span class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl shadow-lg shadow-emerald-500/10">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </span>
+                    <span class="text-2xl font-extrabold tracking-tight text-white">charg<span class="text-emerald-400">EV</span></span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/index.html" class="text-emerald-400 font-medium text-decoration-none">Home</a>
+                    <a href="/station.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Stations</a>
+                    <a href="/booking.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Book Slot</a>
+                    <a href="/mybooking.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">My Bookings</a>
+                    <a href="/dashboard.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Dashboard</a>
+                    <a href="/about.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">About</a>
+                    <a href="/contact.html" class="text-slate-300 hover:text-emerald-400 font-medium transition text-decoration-none">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="/login.html" class="px-4 py-2 rounded-xl text-slate-300 border border-slate-700 hover:border-slate-500 hover:text-white font-medium text-sm transition text-decoration-none">Login</a>
+                    <a href="/register.html" class="btn-brand-primary px-4 py-2 rounded-xl text-sm text-decoration-none">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative py-12 lg:py-20 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Hero Text -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase">
+                        <i class="fa-solid fa-bolt text-xs"></i> Verified Patiala EV Charging Stations
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
+                        Charge Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Electric Vehicle</span> Smarter
+                    </h1>
+
+                    <p class="text-slate-400 text-lg leading-relaxed">
+                        Locate verified DC fast stations in Patiala, reserve charging slots in advance, check live tariffs, and power your journey seamlessly.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="/station.html" class="btn-brand-primary px-7 py-3.5 rounded-xl font-semibold flex items-center gap-2 text-decoration-none shadow-lg shadow-emerald-500/20">
+                            <i class="fa-solid fa-charging-station"></i> Book Slot Now
+                        </a>
+                        <a href="#quick-finder" class="px-7 py-3.5 rounded-xl bg-slate-800/80 text-white font-semibold border border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800 transition flex items-center gap-2 text-decoration-none">
+                            <i class="fa-solid fa-location-dot text-emerald-400"></i> View Stations
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Live Preview Card -->
+                <div class="lg:col-span-6">
+                    <div class="glass-card p-6 shadow-2xl relative border border-slate-800">
+
+                        <!-- Search & Quick Filters Bar -->
+                        <div class="mb-6">
+                            <div class="relative">
+                                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                <input type="text" id="heroSearch" onkeyup="handleHeroSearch()" placeholder="Search by station, area, or connector..." class="w-full bg-slate-900/90 text-slate-200 border border-slate-700/80 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-emerald-500 transition">
+                            </div>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="filter-chip active text-xs px-3 py-1 rounded-full" onclick="filterHeroStations('all', this)">All</span>
+                                <span class="filter-chip text-xs px-3 py-1 rounded-full" onclick="filterHeroStations('fast', this)"><i class="fa-solid fa-bolt text-emerald-400"></i> DC Fast</span>
+                                <span class="filter-chip text-xs px-3 py-1 rounded-full" onclick="filterHeroStations('available', this)"><i class="fa-solid fa-circle-check text-emerald-400"></i> Available</span>
+                                <span class="filter-chip text-xs px-3 py-1 rounded-full" onclick="filterHeroStations('247', this)"><i class="fa-solid fa-clock"></i> 24/7 Open</span>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Station Selector Tabs -->
+                        <div class="flex gap-2 mb-4 overflow-x-auto pb-2 scrollbar-none" id="stationTabs">
+                            <!-- Injected by script -->
+                        </div>
+
+                        <!-- Active Station Live Preview -->
+                        <div id="heroStationCard" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 space-y-4">
+                            <!-- JS Inject Content -->
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS SECTION -->
+    <section class="py-10 border-y border-slate-800/80 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="glass-card p-5">
+                    <div class="text-3xl lg:text-4xl font-extrabold text-emerald-400 mb-1">5+</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Patiala Hubs</div>
+                </div>
+                <div class="glass-card p-5">
+                    <div class="text-3xl lg:text-4xl font-extrabold text-emerald-400 mb-1">60 kW</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Max Output Power</div>
+                </div>
+                <div class="glass-card p-5">
+                    <div class="text-3xl lg:text-4xl font-extrabold text-emerald-400 mb-1">99.8%</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Network Uptime</div>
+                </div>
+                <div class="glass-card p-5">
+                    <div class="text-3xl lg:text-4xl font-extrabold text-emerald-400 mb-1">INR 15+</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Rate / kWh</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">How <span class="text-emerald-400">chargEV</span> Works</h2>
+                <p class="text-slate-400 mt-3 text-base">Get your electric vehicle charged in three simple steps</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 text-center glass-card-hover relative">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-800 text-emerald-400 text-xs font-semibold mb-3">Step 1</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Locate Station</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Browse verified stations across Kalyan, Focal Point, Urban Estate, Rajpura, and Muradpur.</p>
+                </div>
+
+                <div class="glass-card p-8 text-center glass-card-hover relative">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-800 text-emerald-400 text-xs font-semibold mb-3">Step 2</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Reserve Slot</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Select your preferred connector type (CCS2 or Type 2) and reserve your charging window.</p>
+                </div>
+
+                <div class="glass-card p-8 text-center glass-card-hover relative">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-plug-circle-bolt"></i>
+                    </div>
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-800 text-emerald-400 text-xs font-semibold mb-3">Step 3</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Plug & Charge</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Arrive at the location, connect your EV, and complete quick digital billing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE STATION DIRECTORY -->
+    <section id="quick-finder" class="py-16 bg-slate-900/30 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-white">Live Station Directory</h2>
+                    <p class="text-slate-400 text-sm mt-1">Verified charging stations across Patiala and surrounding highways</p>
+                </div>
+                <a href="/station.html" class="inline-flex items-center gap-2 text-emerald-400 font-semibold hover:text-emerald-300 transition text-decoration-none">
+                    View All Stations <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="stationGrid">
+                <!-- JS populated station cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#080d15] border-t border-slate-800/80 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 text-white font-bold text-xl mb-4">
+                        <i class="fa-solid fa-bolt-lightning text-emerald-400"></i> charg<span class="text-emerald-400">EV</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">Connecting Patiala EV owners with verified high-speed charging infrastructure.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="/index.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">Home</a></li>
+                        <li><a href="/station.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">Stations</a></li>
+                        <li><a href="/booking.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">Book Slot</a></li>
+                        <li><a href="/mybooking.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">My Bookings</a></li>
+                        <li><a href="/dashboard.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">Dashboard</a></li>
+                        <li><a href="/about.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-emerald-400 text-decoration-none text-slate-400">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Connectors</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><span class="text-slate-400">CCS2 Fast DC (30kW / 60kW)</span></li>
+                        <li><span class="text-slate-400">Type 2 AC (7.4kW AC)</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Support</h4>
+                    <p class="text-xs text-slate-400 mb-2"><i class="fa-solid fa-phone text-emerald-400 me-1"></i> Helpline: 1800-833-2233</p>
+                    <p class="text-xs text-slate-400"><i class="fa-solid fa-envelope text-emerald-400 me-1"></i> support@chargev.in</p>
+                </div>
+            </div>
+            <div class="border-t border-slate-800/60 pt-6 text-center text-xs text-slate-500">
+                &copy; 2026 chargEV. All rights reserved. Real Patiala Charging Network.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT WITH REAL PATIALA DATA FROM DIRECTORY SOURCE -->
+    <script>
+        const realPatialaStations = [
+            {
+                id: "st-pat-01",
+                tabName: "Patiala Kalyan",
+                name: "Electric Vehicle Charging Station Patiala",
+                location: "01, Patiala, Kalyan, Punjab 147005",
+                power: "30 kW DC",
+                connector: "CCS2",
+                timing: "07:00 AM - 11:00 PM",
+                phone: "18008332233",
+                status: "Available",
+                price: "INR 18/kWh",
+                is247: false,
+                isFast: true
+            },
+            {
+                id: "st-pat-02",
+                tabName: "Focal Point",
+                name: "Electric Vehicle Charging Station Focal",
+                location: "C 71, Focal Point, Patiala, Punjab 147004",
+                power: "60 kW DC",
+                connector: "CCS2",
+                timing: "24/7 Available",
+                phone: "9815096147",
+                status: "Available",
+                price: "INR 22/kWh",
+                is247: true,
+                isFast: true
+            },
+            {
+                id: "st-pat-03",
+                tabName: "Urban Estate",
+                name: "Kazam Charging Station Professor Colony",
+                location: "660, Rajpura Rd, Professor Colony, Phase III, Urban Estate, Patiala 147002",
+                power: "7.4 kW AC",
+                connector: "Type 2 (Kazam)",
+                timing: "07:00 AM - 11:00 PM",
+                phone: "9876543210",
+                status: "Available",
+                price: "INR 15/kWh",
+                is247: false,
+                isFast: false
+            },
+            {
+                id: "st-pat-04",
+                tabName: "Rajpura Rd",
+                name: "ChargeZone Charging Station Rajpura",
+                location: "DPG Hyundai, Rajpura - Patiala Rd, Patiala 147021",
+                power: "30 kW DC",
+                connector: "CCS2 Fast",
+                timing: "24/7 Available",
+                phone: "18008332233",
+                status: "Available",
+                price: "INR 18/kWh",
+                is247: true,
+                isFast: true
+            },
+            {
+                id: "st-pat-05",
+                tabName: "Muradpur",
+                name: "Jio-bp pulse Charging Station Muradpur",
+                location: "Ground Floor, NH 7, Rajpura Rd, Muradpur, Patiala 140701",
+                power: "60 kW DC",
+                connector: "CCS2 Ultra Fast",
+                timing: "24/7 Available",
+                phone: "18008332233",
+                status: "Available",
+                price: "INR 20/kWh",
+                is247: true,
+                isFast: true
+            }
+        ];
+
+        let currentActiveList = [...realPatialaStations];
+        let currentStationIdx = 0;
+
+        function renderTabs() {
+            const tabsContainer = document.getElementById('stationTabs');
+            if (currentActiveList.length === 0) {
+                tabsContainer.innerHTML = `<span class="text-slate-500 text-xs py-1">No stations match query</span>`;
+                return;
+            }
+            tabsContainer.innerHTML = currentActiveList.map((st, idx) => `
+                <button onclick="switchHeroStation(${idx})" id="tab-${idx}" class="tab-btn ${idx === currentStationIdx ? 'active bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-slate-800/60 text-slate-400 border-slate-700/60 hover:text-white'} px-4 py-2 rounded-xl text-xs font-semibold border whitespace-nowrap transition">
+                    ${st.tabName}
+                </button>
+            `).join('');
+        }
+
+        function renderHeroCard(station) {
+            const container = document.getElementById('heroStationCard');
+            if (!station) {
+                container.innerHTML = `<p class="text-slate-400 text-center py-6 text-sm">No station selected.</p>`;
+                return;
+            }
+
+            const statusBadgeClass = station.status === 'Available' ? 'status-badge-available' : 'status-badge-inuse';
+
+            container.innerHTML = `
+                <div class="flex items-start justify-between gap-2">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-white font-bold text-base sm:text-lg">${station.name}</h3>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${statusBadgeClass}">${station.status}</span>
+                        </div>
+                        <p class="text-slate-400 text-xs mt-1"><i class="fa-solid fa-location-dot text-emerald-400 me-1"></i>${station.location}</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">${station.price}</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-slate-400 text-xs block">Output Power</span>
+                        <span class="text-white font-extrabold text-base text-emerald-400">${station.power}</span>
+                    </div>
+                    <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50">
+                        <span class="text-slate-400 text-xs block">Timings</span>
+                        <span class="text-white font-bold text-xs sm:text-sm">${station.timing}</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+                    <div class="text-xs text-slate-300">
+                        <span class="text-slate-500">Connector:</span> <strong class="text-slate-200">${station.connector}</strong>
+                    </div>
+                    <div class="text-xs text-emerald-400 font-medium">
+                        <i class="fa-solid fa-phone me-1"></i>${station.phone}
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <a href="/booking.html?station=${station.id}" class="btn-brand-primary w-full py-2.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 text-decoration-none">
+                        <i class="fa-solid fa-bolt"></i> Reserve Slot at this Station
+                    </a>
+                </div>
+            `;
+        }
+
+        function switchHeroStation(idx) {
+            currentStationIdx = idx;
+            document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+                if (index === idx) {
+                    btn.className = "tab-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap transition";
+                } else {
+                    btn.className = "tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/60 text-slate-400 border border-slate-700/60 hover:text-white whitespace-nowrap transition";
+                }
+            });
+            renderHeroCard(currentActiveList[idx]);
+        }
+
+        function filterHeroStations(type, el) {
+            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
+            el.classList.add('active');
+
+            if (type === 'fast') {
+                currentActiveList = realPatialaStations.filter(s => s.isFast);
+            } else if (type === 'available') {
+                currentActiveList = realPatialaStations.filter(s => s.status === 'Available');
+            } else if (type === '247') {
+                currentActiveList = realPatialaStations.filter(s => s.is247);
+            } else {
+                currentActiveList = [...realPatialaStations];
+            }
+
+            currentStationIdx = 0;
+            renderTabs();
+            renderHeroCard(currentActiveList[0]);
+        }
+
+        function handleHeroSearch() {
+            const query = document.getElementById('heroSearch').value.toLowerCase();
+            currentActiveList = realPatialaStations.filter(s => 
+                s.name.toLowerCase().includes(query) || 
+                s.location.toLowerCase().includes(query) ||
+                s.connector.toLowerCase().includes(query)
+            );
+            currentStationIdx = 0;
+            renderTabs();
+            renderHeroCard(currentActiveList[0]);
+        }
+
+        function renderDirectoryGrid() {
+            const grid = document.getElementById('stationGrid');
+            grid.innerHTML = realPatialaStations.map(s => `
+                <div class="glass-card p-5 glass-card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${s.status === 'Available' ? 'status-badge-available' : 'status-badge-inuse'}">${s.status}</span>
+                            <span class="text-slate-400 text-xs"><i class="fa-solid fa-bolt text-emerald-400 me-1"></i>${s.power}</span>
+                        </div>
+                        <h3 class="text-white font-bold text-base mb-1">${s.name}</h3>
+                        <p class="text-slate-400 text-xs mb-3"><i class="fa-solid fa-location-dot me-1 text-emerald-400"></i>${s.location}</p>
+                        <p class="text-slate-400 text-xs mb-4"><i class="fa-solid fa-clock me-1"></i>${s.timing}</p>
+                    </div>
+                    <div class="border-t border-slate-800/80 pt-3 flex items-center justify-between">
+                        <span class="text-emerald-400 font-bold text-sm">${s.price}</span>
+                        <a href="/booking.html?station=${s.id}" class="text-xs bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 px-3 py-1.5 rounded-lg border border-emerald-500/40 transition text-decoration-none">Book &rarr;</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.onload = function() {
+            renderTabs();
+            renderHeroCard(realPatialaStations[0]);
+            renderDirectoryGrid();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+\documentclass{tietreport}
+
+% Import images
+\usepackage{graphicx}
+
+% Bibliography configuration
+\usepackage[
+  date=year,
+  style=alphabetic,
+  backend=biber,
+  sorting=nty,
+  maxnames=5,
+  minnames=3,
+  maxalphanames=4,
+  minalphanames=3,
+  backref=true,
+  doi=false,
+  isbn=false,
+  url=false,
+  eprint=false
+]{biblatex}
+\addbibresource{references.bib}
+
+%% ==================================================
+%% PROJECT-SPECIFIC FIELDS -- CHARGEV
+%% ==================================================
+
+% Course/Lab header
+\TitlePageHeader{%
+  UCS503P - Software Engineering Project%
+}
+
+% Main project title
+\ProjectTitle{%
+  ChargEV: Find. Charge. Go Green.%
+}
+
+% Subtitle or project description
+\ProjectSubTitle{%
+  The Smart EV Charging Station Platform%
+}
+
+% Student information
+\author{%
+  \texttt{1024170103} Pehal \\
+  \texttt{1024170431} Briti Arora%
+}
+
+% Group number, degree, year, program
+\TitlePageSubText{%
+  Group: BE Third Year, CSE%
+}
+
+% Faculty advisor/guide name
+\AdvisorName{%
+  Dr. Nisha Thakur%
+}
+
+% Evaluation period and department info
+\TitlePageFooterText{{%
+    \large Mid-Semester Evaluation \\[0.2cm]
+    \bfseries Computer Science and Engineering
+    Department%
+  } \\[0.15cm]
+  Thapar Institute of Engineering and Technology,
+  Patiala%
+}
+
+%% ==================================================
+
+\begin{document}
+
+% Generate title page
+\maketitle
+
+% Table of contents (auto-generated from chapters)
+\tableofcontents
+
+% ===== CHAPTER 1: INTRODUCTION =====
+
+\chapter{Introduction}
+
+\section{Background and Context}
+
+Electric vehicle (EV) adoption is accelerating, but the
+charging infrastructure that supports it has not kept
+pace in terms of usability. Drivers routinely do not
+know which nearby stations are actually free, whether a
+connector will be compatible with their vehicle, or
+whether they will have to wait once they arrive. This
+project, \textbf{ChargEV}, aims to remove this
+uncertainty by giving EV drivers a single, reliable
+platform to discover charging stations, check real-time
+availability, and reserve a slot in advance -- turning
+charging from a source of anxiety into a predictable,
+routine task.
+
+\subsection{Problem Statement}
+
+While EV charging infrastructure continues to expand,
+the tools available to EV drivers to actually use that
+infrastructure remain fragmented and unreliable. The
+specific problems this project addresses are:
+
+\begin{itemize}
+  \item \textbf{Discovery gap:} it is hard to find nearby
+    charging stations from a single, reliable source.
+  \item \textbf{Unclear availability:} station status
+    (free, occupied, out of service) is rarely known
+    before arriving.
+  \item \textbf{Wasted time:} drivers wait at busy
+    stations with no way to reserve a slot in advance.
+  \item \textbf{Generic search results:} existing tools
+    do not let drivers filter by connector type,
+    distance, availability, and price together.
+  \item \textbf{Difficult trip planning:} long-distance EV
+    travel requires manually chaining together charging
+    stops.
+  \item \textbf{Low engagement:} there is little incentive
+    for drivers to keep returning to a single platform.
+\end{itemize}
+
+As EV ownership grows, even small improvements in
+charging predictability translate into measurable
+reductions in range anxiety and wasted driver time.
+
+\section{Project Objectives}
+
+\begin{enumerate}
+  \item \textbf{Centralized Station Locator:} Build a
+    single source of truth for nearby EV charging
+    stations, searchable by location.
+  \item \textbf{Real-Time Availability \& Smart Booking:}
+    Deliver a live availability dashboard and an online
+    slot booking and reservation system so drivers can
+    guarantee a charge before they leave.
+  \item \textbf{Smart Search and Trip Planning:} Provide
+    filters by connector type, distance, availability and
+    price, and extend this into route-aware trip planning
+    for long-distance travel.
+  \item \textbf{Engagement Layer:} Implement a
+    gamified rewards system (``EcoCoins'') that tracks
+    savings and eco-impact to encourage repeat usage.
+\end{enumerate}
+
+% ===== CHAPTER 2: METHODOLOGY & DESIGN =====
+
+\chapter{Methodology and Design}
+
+\section{System Architecture}
+
+\subsection{High-Level Design and Modelling}
+
+Before writing any implementation code, the team invested
+the first four weeks of the semester in requirement
+analysis and system modelling, so that the frontend and
+backend work started in parallel could stay consistent
+with a shared blueprint. This involved:
+
+\begin{itemize}
+  \item A \textbf{UML Use Case Diagram} identifying the
+    system boundary and its actors -- the EV Driver
+    (primary actor), the Station Operator (secondary
+    actor), and the Location Services API and MongoDB
+    Atlas as supporting actors -- along with the main
+    features: searching stations, applying smart filters,
+    checking real-time availability, booking a slot,
+    navigating to the station, planning multi-stop trips,
+    and earning EcoCoins.
+  \item An \textbf{Activity Diagram} mapping the
+    step-by-step workflow of a station search, from
+    entering a location and filters to displaying results
+    on the map.
+  \item A \textbf{Swimlane Activity Diagram} that
+    distributes the complete search-book-charge flow
+    across four responsibilities: the EV Driver/Frontend,
+    the Backend API, Location Services (Maps/Places/
+    Directions), and MongoDB Atlas -- covering everything
+    from the initial search through booking, navigation,
+    charging, and the final eco-impact summary.
+  \item A \textbf{Sequence Diagram} describing the
+    chronological, message-level interaction between the
+    User, the Frontend, the Backend, the Database
+    (MongoDB Atlas), and the Google APIs during a station
+    search and booking.
+  \item A \textbf{Collaboration Diagram} representing the
+    same set of interactions as a structural map of
+    communication links between those same components,
+    with each link numbered to show the order of
+    messages.
+  \item A \textbf{Gantt Chart} laying out the full 20-week
+    development plan, from requirement analysis through
+    to the final report and demo.
+\end{itemize}
+
+All diagrams were cross-checked against the project
+proposal to ensure consistency between the stated
+requirements, the workflow, and the proposed system
+architecture, and are presented in full in
+Section~\ref{sec:diagrams}.
+
+\subsection{Technical Stack}
+
+\begin{itemize}
+  \item \textbf{Frontend:} HTML5, CSS3, Bootstrap 5, and
+    JavaScript, built for speed and cross-device
+    responsiveness.
+  \item \textbf{Backend:} Node.js and Express.js, chosen
+    for high-performance, event-driven request routing.
+  \item \textbf{Database:} MongoDB Atlas, a cloud-native
+    document database.
+  \item \textbf{Location Intelligence:} Google Maps API,
+    Google Places API, and Google Directions API, used for
+    station search, geocoding, and route planning.
+\end{itemize}
+
+\section{Implementation Details}
+
+\subsection{Module 1: Frontend UI/UX and Prototype}
+
+Frontend work began with research into interface
+patterns used by other map-based and booking platforms,
+which shaped the decision to use a map-plus-station-list
+layout with a simplified booking flow of
+\emph{station selection $\rightarrow$ slot selection
+$\rightarrow$ confirmation}. Based on this research, a
+fully navigable multi-page interface was implemented
+using HTML5, CSS3 and Bootstrap 5, styled around a
+verified, dark-themed EV charging brand identity:
+
+\begin{itemize}
+  \item A \textbf{Home page} with a hero search bar,
+    quick filters (connector type, availability, 24/7
+    open), and a live-style preview card for the nearest
+    verified station.
+  \item A dedicated \textbf{Stations page} combining a
+    scrollable station directory with an interactive map
+    view, so a driver can compare stations by price,
+    connector type, and timings before choosing one.
+  \item A \textbf{My Bookings} page listing a driver's
+    scheduled charging sessions -- booking ID, station,
+    connector, time window, duration, cost, and status --
+    in a clean, tabular layout.
+  \item A \textbf{Dashboard} presenting an active charging
+    session with live-style telemetry (state of charge,
+    charging rate, energy delivered, elapsed time, and
+    accrued cost), alongside a saved-bookings table, in
+    the format the platform will use once connected to
+    the live backend.
+  \item A \textbf{Create Account} flow for onboarding new
+    drivers onto the Patiala EV charging network.
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/chargev_home.jpeg}
+  \caption{ChargEV Home Page: hero search, quick filters, and nearest-station preview.}
+  \label{fig:ui-home}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/chargev_stations_map.jpeg}
+  \caption{Stations Page: Patiala EV charging directory with combined list and map view.}
+  \label{fig:ui-stations}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/chargev_my_bookings.jpeg}
+  \caption{My Bookings: a driver's scheduled charging sessions in a clear tabular view.}
+  \label{fig:ui-bookings}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/chargev_dashboard.jpeg}
+  \caption{Dashboard: live-style charging telemetry alongside saved booking records.}
+  \label{fig:ui-dashboard}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/chargev_register.jpeg}
+  \caption{Create Account: onboarding flow for new EV drivers.}
+  \label{fig:ui-register}
+\end{figure}
+
+The layout was made \textbf{responsive} across desktop
+and mobile screens using Bootstrap's grid system, and the
+full navigation flow -- Home, Stations, Book Slot, My
+Bookings, and Dashboard -- was validated end to end using
+mock and simulated data, confirming that every screen
+correctly renders the data structures the backend is
+being built to supply.
+
+\subsection{Module 2: Backend Development Setup}
+
+In parallel, the initial backend environment was set up
+so that frontend-backend integration can begin as soon as
+the first API endpoints are ready:
+
+\begin{itemize}
+  \item The \textbf{Node.js and Express.js} server
+    environment was initialised.
+  \item The connection path between the \textbf{frontend,
+    backend, and MongoDB Atlas} was explored and
+    documented.
+  \item The core backend modules were identified:
+    \texttt{users}, \texttt{stations}, and
+    \texttt{bookings}.
+  \item Initial planning was done for the REST API
+    structure that will expose these modules to the
+    frontend in the next iteration.
+\end{itemize}
+
+At this stage, the backend is a scaffolded environment
+rather than a working API -- no endpoints, database
+schema, or live Google API calls have been implemented
+yet. This is the next planned milestone (see
+Section~\ref{sec:future-work}).
+
+\section{System Modeling and Project Diagrams}
+\label{sec:diagrams}
+
+To provide a comprehensive blueprint of the ChargEV
+system, the following diagrams were developed and
+finalized during Weeks~2--4 of the semester.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/gantt_chart.pdf}
+  \caption{ChargEV project timeline (Gantt Chart) across the 20-week semester.}
+  \label{fig:gantt}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/use_case_diagram.pdf}
+  \caption{UML Use Case Diagram identifying the EV Driver, Station Operator, and supporting actors.}
+  \label{fig:usecase}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{images/activity_diagram.pdf}
+  \caption{UML Activity Diagram for the station search workflow.}
+  \label{fig:activity}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/activity_diagram_swimlanes.pdf}
+  \caption{UML Activity Diagram mapped across swimlanes: EV Driver/Frontend, Backend API, Location Services, and MongoDB Atlas.}
+  \label{fig:swimlanes}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/sequence_diagram.pdf}
+  \caption{UML Sequence Diagram depicting the chronological interaction between system components during a station search and booking.}
+  \label{fig:sequence}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/collaboration_diagram.pdf}
+  \caption{UML Collaboration Diagram highlighting the structural communication links between components.}
+  \label{fig:collaboration}
+\end{figure}
+
+% ===== CHAPTER 3: RESULTS & EVALUATION =====
+
+\chapter{Results and Evaluation}
+
+\section{Testing Methodology}
+
+As this is the mid-semester evaluation stage, our
+efforts have successfully culminated in a validated
+system blueprint and a fully navigable frontend
+prototype for ChargEV:
+
+\begin{itemize}
+  \item \textbf{UML Design Validation:} The comprehensive
+    UML models -- Use Case, Activity, Swimlane Activity,
+    Sequence, and Collaboration diagrams -- have been
+    cross-checked against the project proposal and
+    validated as the logical blueprint for the
+    discover-book-charge workflow.
+  \item \textbf{UI/UX Validation:} The frontend has
+    undergone rigorous interface validation across five
+    core screens -- Home, Stations, My Bookings,
+    Dashboard, and Create Account. The layout maintains
+    responsiveness across desktop and mobile viewports,
+    and input integrity is enforced through HTML5
+    attributes and JavaScript event listeners.
+  \item \textbf{Mock Integration \& Flow:} The interface
+    transitions seamlessly from station discovery on the
+    Home and Stations pages, through booking, to the
+    Dashboard and My Bookings views. The mock and
+    simulated data used at this stage successfully
+    populates every station card, booking row, and
+    telemetry widget, confirming that the frontend is
+    fully capable of rendering the data structures the
+    backend is being built to supply.
+  \item \textbf{Backend Environment Validation:} The
+    Node.js and Express.js server environment was
+    initialised and validated as ready to host the
+    \texttt{users}, \texttt{stations}, and
+    \texttt{bookings} modules, with the MongoDB Atlas
+    connection path confirmed ahead of full API
+    development.
+\end{itemize}
+
+\section{Performance Metrics}
+
+To keep development outcome-driven, the proposal defines
+the metrics framework that will validate ChargEV's
+booking workflow as backend integration proceeds:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|p{6.5cm}|}
+  \hline
+  \textbf{Metric} & \textbf{Definition / Target} \\
+  \hline
+  Time-to-Charge (TTC) & Time from opening the app to
+    starting a charge at a booked slot; target is a
+    reduced median TTC versus a no-booking, walk-in
+    baseline. \\
+  \hline
+  Booking Conversion Rate & Percentage of station
+    searches that convert into a confirmed slot booking. \\
+  \hline
+  Availability Data Accuracy & Agreement between the
+    displayed station status and the actual status
+    observed on arrival. \\
+  \hline
+  User Engagement & Repeat-usage rate and EcoCoins
+    accumulated per active user. \\
+  \hline
+\end{tabular}
+\caption{Evaluation metrics framework for the ChargEV booking workflow.}
+\label{tab:metrics}
+\end{table}
+
+This framework ensures that once the backend and live
+station data are connected, ChargEV's success can be
+measured objectively against the same discover-book-charge
+workflow already validated in the UI and system diagrams.
+
+\section{Analysis}
+
+Our progress strictly adheres to our initial Gantt chart
+objectives for the Requirements, UI/UX, and Backend Setup
+phases shown in Figure~\ref{fig:gantt}. The robust,
+multi-page, mock-data-driven design of the frontend
+ensures that integrating the REST API will require
+minimal UI refactoring, since every screen has already
+been validated against the same data shapes the backend
+modules are designed to return. The parallel system
+modelling effort -- particularly the Swimlane Activity
+Diagram and the Sequence and Collaboration diagrams --
+gave both halves of the team a shared contract to build
+against, so that the frontend and backend work completed
+independently in the first four weeks will integrate
+cleanly. Moving forward, the primary engineering focus
+will shift to implementing the \texttt{stations} and
+\texttt{bookings} REST endpoints and connecting them to
+the already-validated frontend and location-intelligence
+architecture.
+
+% ===== CHAPTER 4: CONCLUSION =====
+
+\chapter{Conclusion}
+
+\section{Summary of Work}
+
+To date, the team has:
+
+\begin{itemize}
+  \item Defined the problem scope and finalized the
+    project proposal and technical stack.
+  \item Completed a full set of UML and project
+    diagrams -- Gantt Chart, Use Case, Activity,
+    Swimlane Activity, Sequence, and Collaboration --
+    validated against the proposal.
+  \item Built and validated a fully navigable, responsive
+    frontend prototype spanning the Home, Stations, My
+    Bookings, Dashboard, and Create Account screens.
+  \item Initialised and validated the Node.js/Express
+    backend environment and its planned connection to
+    MongoDB Atlas.
+\end{itemize}
+
+\section{Key Findings}
+
+\begin{itemize}
+  \item \textbf{Finding 1:} Building the frontend first,
+    in the shape defined by the Use Case and Sequence
+    diagrams, means the planned REST API can be dropped
+    in with minimal UI refactoring later.
+  \item \textbf{Finding 2:} The Swimlane Activity Diagram
+    clarified responsibility boundaries between the
+    Backend API and Location Services early, before any
+    backend code was written, which directly shaped how
+    the \texttt{stations} and \texttt{bookings} modules
+    were scoped.
+  \item \textbf{Finding 3:} Designing the Dashboard and My
+    Bookings screens around the exact fields the MongoDB
+    schema will store (booking ID, connector, time window,
+    cost, status) gives the team a validated target schema
+    to implement against in the next iteration.
+\end{itemize}
+
+\section{Future Work and Recommendations}
+\label{sec:future-work}
+
+Following the established Gantt chart timeline, the
+immediate next steps are:
+
+\begin{enumerate}
+  \item \textbf{REST API Development:} Implement the
+    \texttt{stations}, \texttt{bookings}, and
+    \texttt{users} endpoints in Express and connect them
+    to a MongoDB Atlas schema.
+  \item \textbf{Location Intelligence Integration:}
+    Integrate the Google Maps, Places, and Directions
+    APIs for live station search, geocoding, and routing.
+  \item \textbf{Frontend-Backend Integration:} Connect the
+    validated frontend screens to live API responses, so
+    the already-built UI is driven end-to-end.
+  \item \textbf{Trip Planning and EcoCoins:} Build the
+    route-aware trip planning module and the EcoCoins
+    rewards and eco-impact tracking engine.
+  \item \textbf{Testing and CI/CD:} Add unit and
+    integration tests, and set up a CI/CD pipeline for
+    staged, incremental releases.
+\end{enumerate}
+
+\section{Final Remarks}
+
+The first four weeks of this project have established a
+consistent, validated blueprint -- across the proposal,
+the full UML diagram set, and a fully navigable frontend
+prototype -- for the discover-book-charge workflow that
+ChargEV is built around. This foundation is intended to
+make the coming integration phase, where the frontend,
+backend, and external APIs are connected end-to-end,
+significantly more predictable.
+
+% ===== BIBLIOGRAPHY =====
+
+% Print bibliography with heading in TOC
+\printbibliography[heading=bibintoc]
+
+\end{document}

@@ -1,0 +1,717 @@
+/* ===========================
+   chargEV EV Charging Website
+   Global Styles
+=========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    color: #222;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar {
+    background: #111827;
+    padding: 15px 60px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+}
+
+.navbar-brand {
+    font-size: 30px;
+    font-weight: 700;
+    color: #00e676 !important;
+}
+
+.navbar-brand span {
+    color: #ffb74d;
+}
+
+.nav-link {
+    color: white !important;
+    margin-left: 15px;
+    transition: .3s;
+}
+
+.nav-link:hover {
+    color: #00e676 !important;
+}
+
+.btn-login {
+    border: 2px solid white;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+.btn-login:hover {
+    background: white;
+    color: #111827;
+}
+
+.btn-register {
+    background: #00c853;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 18px;
+    transition: .3s;
+}
+
+.btn-register:hover {
+    background: #009624;
+}
+
+/* ===========================
+   Hero Section
+=========================== */
+
+.hero {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8fafc, #ecfdf5);
+}
+
+.hero h1 {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.hero h2 {
+    color: #00a651;
+    font-size: 58px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #555;
+    margin: 25px 0;
+}
+
+.hero img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .15);
+}
+
+.btn-green {
+    background: #00b050;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    transition: .3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-green:hover {
+    background: #009245;
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    border: 2px solid #00b050;
+    color: #00b050;
+    padding: 14px 30px;
+    border-radius: 10px;
+    margin-left: 15px;
+    transition: .3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background: #00b050;
+    color: white;
+}
+
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f5fff7, #e8fff0);
+}
+
+.hero-image {
+    border-radius: 30px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    transition: .4s;
+}
+
+.hero-image:hover {
+    transform: scale(1.03);
+}
+
+.hero-section h1 {
+    line-height: 1.2;
+}
+
+.hero-section .btn {
+    transition: .3s;
+}
+
+.hero-section .btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ===========================
+   Search Box & Section
+=========================== */
+
+.search-section {
+    background: #f7fafc;
+}
+
+.search-box {
+    background: white;
+    margin-top: -40px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+}
+
+.search-box input,
+.search-box select,
+.search-box button {
+    height: 55px;
+}
+
+.search-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 40px;
+    transition: .4s;
+}
+
+.search-card:hover {
+    transform: translateY(-6px);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.form-label i {
+    color: #1db954;
+    margin-right: 8px;
+}
+
+.search-btn {
+    height: 55px;
+    border-radius: 12px;
+    background: #16a34a;
+    color: white;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.search-btn:hover {
+    background: #0f8c3a;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* ===========================
+   Section Titles & Headings
+=========================== */
+
+.section-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+.section-title span {
+    color: #00b050;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 50px;
+    background: #dff7ea;
+    color: #16a34a;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    color: #64748b;
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+/* ===========================
+   Feature Cards
+=========================== */
+
+.feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    text-align: center;
+    transition: .4s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, .15);
+}
+
+.feature-card img {
+    width: 75px;
+    margin-bottom: 20px;
+}
+
+.feature-card h4 {
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: #666;
+}
+
+.icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 34px;
+}
+
+/* ===========================
+   Station Cards
+=========================== */
+
+.station-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: .35s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
+}
+
+.station-card:hover {
+    transform: translateY(-8px);
+}
+
+.station-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.station-content {
+    padding: 20px;
+}
+
+.station-content h4 {
+    margin-bottom: 10px;
+}
+
+.station-content p {
+    color: #666;
+}
+
+.badge-open {
+    background: #28a745;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 20px;
+}
+
+.badge-busy {
+    background: #ff9800;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 20px;
+}
+
+.station-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* =====================================================
+   FULL BLEED EDGE-TO-EDGE VIDEO SHOWCASE
+===================================================== */
+
+.video-showcase {
+    width: 100%;
+    padding: 40px 0; /* Zero side padding so video touches edge of screen */
+    background: #f8fafc;
+}
+
+.video-heading {
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+.video-heading h2 {
+    font-size: 2.2rem;
+    margin-top: 10px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 520px;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.video-wrapper video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Hide WebKit native video controls */
+video::-webkit-media-controls {
+    display: none !important;
+}
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+/* =====================================================
+   SMART EV SECTION
+===================================================== */
+
+.smart-text {
+    background: #ffffff;
+}
+
+.smart-text h2 {
+    color: #111827;
+    line-height: 1.2;
+}
+
+.smart-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.smart-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f8fafc;
+    transition: 0.3s ease;
+}
+
+.smart-feature i {
+    color: #16a34a;
+    font-size: 1.3rem;
+}
+
+.smart-feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.smart-image {
+    width: 100%;
+}
+
+/* =====================================================
+   HOW IT WORKS
+===================================================== */
+
+.how-card {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 18px;
+    height: 100%;
+    transition: 0.3s ease;
+}
+
+.how-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.how-icon {
+    width: 60px;
+    height: 60px;
+    background: #16a34a;
+    color: #ffffff;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* ===========================
+   Forms
+=========================== */
+
+.form-container {
+    width: 450px;
+    max-width: 95%;
+    margin: 70px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .12);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-control,
+.form-select {
+    height: 55px;
+    border-radius: 12px;
+    border: 1px solid #dbe2ea;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #1db954;
+}
+
+.form-btn {
+    width: 100%;
+    background: #00b050;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.form-btn:hover {
+    background: #009245;
+}
+
+/* ===========================
+   Dashboard Cards
+=========================== */
+
+.dashboard-card {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+}
+
+/* ===========================
+   Booking Table
+=========================== */
+
+.table {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: #00b050;
+    color: white;
+}
+
+/* ===========================
+   About & Contact Sections
+=========================== */
+
+.about-section {
+    padding: 70px 0;
+}
+
+.about-section img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.contact-box {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 80px;
+}
+
+footer a {
+    color: #00e676;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Animations
+=========================== */
+
+.fade-up {
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.zoom {
+    transition: .4s;
+}
+
+.zoom:hover {
+    transform: scale(1.05);
+}
+
+/* ===========================
+   Responsive Breakpoints
+=========================== */
+
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 42px;
+    }
+    .hero h2 {
+        font-size: 40px;
+    }
+    .navbar {
+        padding: 15px;
+    }
+    .search-box {
+        margin-top: 20px;
+    }
+    .section-title {
+        font-size: 34px;
+    }
+    .search-card {
+        padding: 25px;
+    }
+    .video-wrapper {
+        height: 380px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        text-align: center;
+    }
+    .hero img {
+        margin-top: 30px;
+    }
+    .hero h1 {
+        font-size: 35px;
+    }
+    .hero h2 {
+        font-size: 34px;
+    }
+    .section-title {
+        font-size: 28px;
+    }
+    .station-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .form-container {
+        width: 95%;
+    }
+    .search-card {
+        padding: 20px;
+    }
+    .video-heading h2 {
+        font-size: 1.8rem;
+    }
+    .video-showcase {
+        padding: 30px 0;
+    }
+    .video-wrapper {
+        height: 260px;
+    }
+    .smart-text {
+        text-align: center;
+    }
+    .smart-feature {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+    .hero h2 {
+        font-size: 28px;
+    }
+    .btn-outline {
+        margin-left: 0;
+        margin-top: 12px;
+    }
+    .video-wrapper {
+        height: 200px;
+    }
+}
